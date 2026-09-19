@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     
+    <!-- Mobile Browser Chrome / Address Bar Theme Colors (Light default: #F8FAFC, Dark: #070B14) -->
+    <meta name="theme-color" content="#F8FAFC" id="theme-color-meta">
+    <meta name="msapplication-navbutton-color" content="#F8FAFC" id="ms-theme-color-meta">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" id="apple-status-bar-meta">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    
     <!-- Primary Meta Tags -->
     <title>BIOFOLD - AI-Powered Structural Biology & Proteome Intelligence Platform</title>
     <meta name="title" content="BIOFOLD - AI-Powered Structural Biology & Proteome Intelligence Platform">
@@ -13,9 +20,10 @@
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://coderbaba0.github.io/biofold/">
 
-    <!-- Favicon (Browser Chrome Tab Icon) -->
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <link rel="alternate icon" href="favicon.svg">
+    <!-- Favicon (PNG App Icon & SVG Chrome Tab Icon) -->
+    <link rel="icon" type="image/png" href="appicon.png">
+    <link rel="apple-touch-icon" href="appicon.png">
+    <link rel="alternate icon" type="image/svg+xml" href="favicon.svg">
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website">
@@ -279,8 +287,8 @@
     <header class="sticky top-0 z-50 glass-panel border-b border-black/5 dark:border-white/5 py-3 px-3 sm:px-8">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <!-- Brand Logo in All Capital Letters with Sleek Letter Spacing (BIOFOLD) -->
-            <a href="#" class="flex items-center gap-2 group shrink-0">
-                <i data-lucide="atom" class="w-6 h-6 sm:w-7 sm:h-7 text-teal-600 dark:text-teal-400 animate-spin-slow"></i>
+            <a href="#" class="flex items-center gap-2.5 group shrink-0">
+                <img src="appicon.png" alt="BIOFOLD" class="w-7 h-7 sm:w-8 sm:h-8 object-contain rounded-lg shadow-sm" />
                 <span class="text-lg sm:text-2xl font-black tracking-widest text-slate-900 dark:text-white uppercase">BIO<span class="gradient-text">FOLD</span></span>
             </a>
 
@@ -556,8 +564,7 @@
         <!-- 3. IN-SILICO COMPUTATIONAL INTELLIGENCE ENGINES -->
         <section id="algorithms" class="py-14 sm:py-16 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-slate-800/60">
             <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
-                <span class="text-[10px] sm:text-xs font-extrabold uppercase tracking-wider text-teal-600 dark:text-teal-400 bg-teal-100 dark:bg-teal-950/70 border border-teal-300 dark:border-teal-500/30 px-3 py-1 rounded-full">Pure On-Device Compute (&lt;5ms)</span>
-                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white mt-3 mb-2 sm:mb-3">In-Silico Biophysical Algorithms</h2>
+                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white mt-1 mb-2 sm:mb-3">In-Silico Biophysical Algorithms</h2>
                 <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">Native mathematical engines executing directly on your phone's processor with 0 MB cloud latency and 100% offline data privacy.</p>
             </div>
 
@@ -972,7 +979,7 @@
     <footer class="border-t border-slate-200 dark:border-slate-800/80 py-10 px-4 sm:px-8 text-center text-xs text-slate-500">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
             <div class="flex items-center justify-center gap-2">
-                <i data-lucide="atom" class="w-4 h-4 text-teal-600 dark:text-teal-400 animate-spin-slow"></i>
+                <img src="appicon.png" alt="BIOFOLD" class="w-4 h-4 object-contain rounded" />
                 <span class="font-bold tracking-wider text-slate-800 dark:text-slate-300 uppercase">BIOFOLD</span>
                 <span>— Open Science Structural Biology</span>
             </div>
@@ -994,9 +1001,20 @@
         lucide.createIcons();
 
         // 2. Dark / Light Theme Toggle Logic (Default: Light Mode)
+        function updateThemeColorMeta(isDark) {
+            const themeColor = isDark ? '#070B14' : '#F8FAFC';
+            const themeMeta = document.getElementById('theme-color-meta');
+            const msMeta = document.getElementById('ms-theme-color-meta');
+            const appleMeta = document.getElementById('apple-status-bar-meta');
+            if (themeMeta) themeMeta.setAttribute('content', themeColor);
+            if (msMeta) msMeta.setAttribute('content', themeColor);
+            if (appleMeta) appleMeta.setAttribute('content', isDark ? 'black-translucent' : 'default');
+        }
+
         function initTheme() {
             const savedTheme = localStorage.getItem('biofold-theme') || 'light';
-            if (savedTheme === 'dark') {
+            const isDark = (savedTheme === 'dark');
+            if (isDark) {
                 document.documentElement.classList.add('dark');
                 document.getElementById('theme-icon-moon').classList.add('hidden');
                 document.getElementById('theme-icon-sun').classList.remove('hidden');
@@ -1005,6 +1023,7 @@
                 document.getElementById('theme-icon-moon').classList.remove('hidden');
                 document.getElementById('theme-icon-sun').classList.add('hidden');
             }
+            updateThemeColorMeta(isDark);
         }
 
         function toggleTheme() {
@@ -1018,6 +1037,7 @@
                 document.getElementById('theme-icon-moon').classList.remove('hidden');
                 document.getElementById('theme-icon-sun').classList.add('hidden');
             }
+            updateThemeColorMeta(isDark);
         }
         initTheme();
 
