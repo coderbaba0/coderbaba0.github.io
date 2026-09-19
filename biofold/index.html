@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>BIOFOLD - AI-Powered Structural Biology & Proteome Intelligence Platform</title>
+    <meta name="title" content="BIOFOLD - AI-Powered Structural Biology & Proteome Intelligence Platform">
+    <meta name="description" content="Explore AlphaFold 3D protein structures, analyze residue pLDDT confidence scores, perform dual-protein pairwise comparisons, and generate publication-ready PDF research dossiers on mobile.">
+    <meta name="keywords" content="BIOFOLD, AlphaFold, UniProt, RCSB PDB, Protein Structure, Bioinformatics, pLDDT Confidence, Molecular Biology, InterPro, Europe PMC, Flutter Bioinformatics App, Open Science">
+    <meta name="author" content="BioFold Development Team">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://coderbaba0.github.io/biofold/">
+
+    <!-- Favicon (Browser Chrome Tab Icon) -->
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="alternate icon" href="favicon.svg">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://coderbaba0.github.io/biofold/">
+    <meta property="og:title" content="BIOFOLD - Next-Gen Structural Biology & Proteome Intelligence">
+    <meta property="og:description" content="Unified mobile research platform integrating AlphaFold 3D predictions, UniProt annotations, InterPro domains, and automated publication-ready PDF research dossiers.">
+    <meta property="og:image" content="screenshots/01_home.png">
+
+    <!-- Twitter Card -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://coderbaba0.github.io/biofold/">
+    <meta property="twitter:title" content="BIOFOLD - AI-Powered Structural Biology Suite">
+    <meta property="twitter:description" content="Explore AlphaFold 3D structures, analyze pLDDT confidence, compare protein homologs, and manage multi-note evidence boards.">
+    <meta property="twitter:image" content="screenshots/01_home.png">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Tailwind CSS (Standalone) with class-based dark mode -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            500: '#004D40',
+                            600: '#00564F',
+                            700: '#0F766E',
+                            800: '#0D9488',
+                            teal: '#0D9488',
+                            emerald: '#059669',
+                            dark: '#070B14',
+                            card: '#0F172A',
+                            border: '#1E293B',
+                            accent: '#14B8A6',
+                            neon: '#5EEAD4'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif'],
+                        mono: ['Fira Code', 'monospace'],
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'spin-slow': 'spin 14s linear infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-6px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Schema.org JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "BioFold",
+      "operatingSystem": "Android, iOS, Web",
+      "applicationCategory": "Education, Science, Bioinformatics",
+      "downloadUrl": "https://play.google.com/store/apps/details?id=com.biofold.biofold_learn",
+      "offers": {
+        "@type": "Offer",
+        "price": "0.00",
+        "priceCurrency": "USD"
+      },
+      "description": "An open-science molecular bioinformatics and structural biology platform powered by AlphaFold DB, UniProt, RCSB PDB, and Europe PMC.",
+      "author": {
+        "@type": "Organization",
+        "name": "BioFold Research",
+        "email": "theflutterfever@gmail.com"
+      }
+    }
+    </script>
+
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* Light Mode Default Theme Styles */
+        html:not(.dark) body {
+            background-color: #F8FAFC;
+            color: #0F172A;
+        }
+        html:not(.dark) .glass-panel {
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(15, 23, 42, 0.09);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
+        }
+        html:not(.dark) .glow-radial {
+            background: radial-gradient(circle at 50% 20%, rgba(13, 148, 136, 0.08), transparent 65%);
+        }
+        html:not(.dark) .gradient-text {
+            background: linear-gradient(135deg, #0F766E 0%, #0D9488 50%, #047857 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Dark Mode Theme Styles */
+        html.dark body {
+            background-color: #070B14;
+            color: #F1F5F9;
+        }
+        html.dark .glass-panel {
+            background: rgba(15, 23, 42, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        html.dark .glow-radial {
+            background: radial-gradient(circle at 50% 20%, rgba(13, 148, 136, 0.14), transparent 65%);
+        }
+        html.dark .gradient-text {
+            background: linear-gradient(135deg, #5EEAD4 0%, #14B8A6 60%, #059669 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-card-hover {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .glass-card-hover:hover {
+            transform: translateY(-4px);
+            border-color: rgba(94, 234, 212, 0.4);
+            box-shadow: 0 14px 30px -10px rgba(13, 148, 136, 0.22);
+        }
+
+        /* 3-Phone Showcase Styling */
+        .showcase-stage {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            user-select: none;
+        }
+
+        /* Main Center Phone */
+        .phone-center {
+            width: 220px;
+            border: 6px solid #0F172A;
+            border-radius: 34px;
+            box-shadow: 0 30px 65px -15px rgba(15, 23, 42, 0.35), 0 0 35px rgba(13, 148, 136, 0.2);
+            position: relative;
+            background: #070B14;
+            z-index: 20;
+            transition: all 0.4s ease;
+        }
+        html.dark .phone-center {
+            border-color: #1E293B;
+            box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.9), 0 0 35px rgba(13, 148, 136, 0.3);
+        }
+
+        /* Left Angled Side Phone */
+        .phone-left {
+            width: 185px;
+            border: 4.5px solid #1E293B;
+            border-radius: 28px;
+            position: relative;
+            background: #070B14;
+            z-index: 10;
+            transform: rotate(-9deg) translateY(18px) scale(0.91);
+            opacity: 0.65;
+            box-shadow: -15px 20px 40px -10px rgba(15, 23, 42, 0.25);
+            transition: all 0.4s ease;
+        }
+        html.dark .phone-left {
+            box-shadow: -15px 20px 40px -10px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Right Angled Side Phone */
+        .phone-right {
+            width: 185px;
+            border: 4.5px solid #1E293B;
+            border-radius: 28px;
+            position: relative;
+            background: #070B14;
+            z-index: 10;
+            transform: rotate(9deg) translateY(18px) scale(0.91);
+            opacity: 0.65;
+            box-shadow: 15px 20px 40px -10px rgba(15, 23, 42, 0.25);
+            transition: all 0.4s ease;
+        }
+        html.dark .phone-right {
+            box-shadow: 15px 20px 40px -10px rgba(0, 0, 0, 0.7);
+        }
+
+        @media (min-width: 640px) {
+            .phone-center { width: 245px; border-width: 7px; border-radius: 36px; }
+            .phone-left { width: 205px; border-width: 5px; border-radius: 30px; }
+            .phone-right { width: 205px; border-width: 5px; border-radius: 30px; }
+        }
+
+        .phone-speaker {
+            position: absolute;
+            top: 7px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 45px;
+            height: 3px;
+            background: #334155;
+            border-radius: 999px;
+            z-index: 30;
+        }
+        .phone-camera {
+            position: absolute;
+            top: 7px;
+            left: 36%;
+            width: 5.5px;
+            height: 5.5px;
+            background: #0F172A;
+            border-radius: 50%;
+            z-index: 30;
+        }
+        .svg-glow {
+            filter: drop-shadow(0 0 8px rgba(20, 184, 166, 0.4));
+        }
+        #molecule-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #070B14; }
+        ::-webkit-scrollbar-thumb { background: #1E293B; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #0D9488; }
+    </style>
+</head>
+<body class="selection:bg-teal-500 selection:text-white">
+
+    <!-- Interactive Molecular Simulation Background Canvas -->
+    <canvas id="molecule-canvas"></canvas>
+
+    <!-- Ambient Glow Backgrounds -->
+    <div class="fixed inset-0 glow-radial pointer-events-none z-0"></div>
+    <div class="fixed top-[-10%] left-[-10%] w-[500px] h-[500px] bg-teal-600/10 rounded-full blur-[140px] pointer-events-none z-0"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none z-0"></div>
+
+    <!-- Sticky Navigation Bar -->
+    <header class="sticky top-0 z-50 glass-panel border-b border-black/5 dark:border-white/5 py-3 px-4 sm:px-8">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Brand Logo in All Capital Letters with Sleek Letter Spacing (BIOFOLD) -->
+            <a href="#" class="flex items-center gap-2.5 group">
+                <i data-lucide="atom" class="w-7 h-7 text-teal-600 dark:text-teal-400 animate-spin-slow"></i>
+                <span class="text-xl sm:text-2xl font-black tracking-widest text-slate-900 dark:text-white uppercase">BIO<span class="gradient-text">FOLD</span></span>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden lg:flex items-center gap-8 text-xs font-semibold text-slate-600 dark:text-slate-300">
+                <a href="#features" class="hover:text-teal-600 dark:hover:text-teal-300 transition-colors">Features</a>
+                <a href="#plddt-guide" class="hover:text-teal-600 dark:hover:text-teal-300 transition-colors">pLDDT Guide</a>
+                <a href="#faq" class="hover:text-teal-600 dark:hover:text-teal-300 transition-colors">FAQ</a>
+                <a href="#quickstart" class="hover:text-teal-600 dark:hover:text-teal-300 transition-colors">Quickstart</a>
+                <a href="#contact" class="hover:text-teal-600 dark:hover:text-teal-300 transition-colors">Contact</a>
+            </nav>
+
+            <!-- Action CTAs: Theme Switcher + GitHub (with Inline SVG Icon) + Play Store -->
+            <div class="flex items-center gap-2 sm:gap-3">
+                
+                <!-- Dark / Light Theme Toggle Switcher Button (Default: Light Mode) -->
+                <button id="theme-toggle" onclick="toggleTheme()" class="p-2 sm:px-2.5 sm:py-2 rounded-xl text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white bg-slate-100 dark:bg-slate-800/90 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700/60 transition-all flex items-center justify-center cursor-pointer shadow-sm hover:scale-105" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+                    <!-- In light mode by default, show moon icon to switch to dark -->
+                    <svg id="theme-icon-moon" class="w-4 h-4 text-slate-700 dark:text-teal-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+                    </svg>
+                    <!-- In dark mode, show sun icon to switch to light -->
+                    <svg id="theme-icon-sun" class="w-4 h-4 text-amber-400 hidden" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="4"></circle>
+                        <path d="M12 2v2"></path><path d="M12 20v2"></path>
+                        <path d="m4.93 4.93 1.41 1.41"></path><path d="m17.66 17.66 1.41 1.41"></path>
+                        <path d="M2 12h2"></path><path d="M20 12h2"></path>
+                        <path d="m6.34 17.66-1.41 1.41"></path><path d="m19.07 4.93-1.41 1.41"></path>
+                    </svg>
+                </button>
+
+                <!-- GitHub Button with Clean Crisp Inline SVG Icon -->
+                <a href="https://github.com/coderbaba0/biofold" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-slate-900 dark:bg-slate-800/90 hover:bg-slate-800 dark:hover:bg-slate-700 border border-slate-800 dark:border-slate-700/60 transition-all hover:scale-[1.02] shadow-sm">
+                    <svg class="w-4 h-4 fill-current text-white" viewBox="0 0 24 24">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                    </svg>
+                    <span>GitHub</span>
+                </a>
+
+                <!-- Google Play Button -->
+                <a href="https://play.google.com/store/apps/details?id=com.biofold.biofold_learn" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs font-bold text-slate-950 bg-gradient-to-r from-teal-300 via-teal-400 to-emerald-400 hover:opacity-95 shadow-lg shadow-teal-500/20 transition-all hover:scale-[1.02]">
+                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                        <path d="M3.609 1.814L13.792 12 3.61 22.186c-.4-.36-.61-.9-.61-1.55V3.364c0-.65.21-1.19.609-1.55zm11.233 11.233L6.208 21.68l9.646-5.57 3.23-1.865-4.242-1.2zm-.001-2.093l4.243-1.2-3.23-1.865-9.646-5.57 8.633 8.635zm5.727 1.047c.65.37.65.98 0 1.35l-3.08 1.78-2.03-2.03 2.03-2.03 3.08 1.78z"/>
+                    </svg>
+                    <span>Google Play</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="relative z-10">
+
+        <!-- 1. HERO SECTION (3-LINE TITLE + 3-PHONE SHOWCASE STAGE) -->
+        <section class="relative pt-8 pb-16 sm:pt-14 sm:pb-24 px-4 sm:px-8 max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+                
+                <!-- Left: 3-Line Title (Half Solid Contrast, Half Theme Color), Substantial Description Aligned with Mobile Frame Height -->
+                <div class="lg:col-span-6 flex flex-col justify-between space-y-6 text-center lg:text-left py-2">
+                    
+                    <!-- Dynamic 3-Line Main Headline (Half Solid Text, Half Gradient Theme Color) -->
+                    <h1 class="text-3xl sm:text-5xl lg:text-[3.25rem] font-black tracking-tight leading-[1.12] min-h-[120px] sm:min-h-[160px] flex items-center justify-center lg:justify-start">
+                        <div id="hero-title-container" class="transition-all duration-500 transform">
+                            <span class="text-slate-900 dark:text-white">AlphaFold 3D Explorer</span><br />
+                            <span class="text-slate-900 dark:text-white">Molecular Structures</span><br />
+                            <span class="gradient-text">&amp; Confidence Metrics.</span>
+                        </div>
+                    </h1>
+
+                    <!-- Enriched, Professional Description Text with High Contrast in Both Light & Dark -->
+                    <div class="min-h-[110px] sm:min-h-[130px] flex items-center justify-center lg:justify-start">
+                        <p id="hero-desc" class="text-slate-700 dark:text-slate-300 text-sm sm:text-base lg:text-[1.05rem] font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0 transition-all duration-500">
+                            BioFold unifies <strong>AlphaFold 3D predictions</strong>, <strong>UniProtKB Swiss-Prot annotations</strong>, <strong>InterPro functional domains</strong>, and <strong>Europe PMC open literature</strong> into a high-performance, offline-ready research dossier platform designed for molecular biologists and bioinformaticians.
+                        </p>
+                    </div>
+
+                    <!-- CTAs -->
+                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-1">
+                        <a href="https://play.google.com/store/apps/details?id=com.biofold.biofold_learn" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-xl font-bold text-sm text-slate-950 bg-gradient-to-r from-teal-300 via-teal-400 to-emerald-400 hover:shadow-teal-500/25 hover:shadow-xl transition-all flex items-center gap-3 hover:scale-[1.02]">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                                <path d="M3.609 1.814L13.792 12 3.61 22.186c-.4-.36-.61-.9-.61-1.55V3.364c0-.65.21-1.19.609-1.55zm11.233 11.233L6.208 21.68l9.646-5.57 3.23-1.865-4.242-1.2zm-.001-2.093l4.243-1.2-3.23-1.865-9.646-5.57 8.633 8.635zm5.727 1.047c.65.37.65.98 0 1.35l-3.08 1.78-2.03-2.03 2.03-2.03 3.08 1.78z"/>
+                            </svg>
+                            <span>Download on Google Play</span>
+                        </a>
+                        <a href="#features" class="px-6 py-3.5 rounded-xl font-bold text-sm text-slate-800 dark:text-white bg-white/90 dark:bg-slate-900/60 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700/80 transition-all flex items-center gap-2 shadow-sm">
+                            <i data-lucide="layers" class="w-4 h-4 text-teal-600 dark:text-teal-400"></i>
+                            <span>Explore Capabilities</span>
+                        </a>
+                    </div>
+
+                    <!-- Verified Scientific Data Strip -->
+                    <div class="pt-4 border-t border-slate-300 dark:border-slate-800/60 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-slate-600 dark:text-slate-400 text-xs font-semibold">
+                        <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-600 dark:text-teal-400"></i> AlphaFold DB</span>
+                        <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-600 dark:text-teal-400"></i> UniProtKB</span>
+                        <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-600 dark:text-teal-400"></i> RCSB PDB</span>
+                        <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-600 dark:text-teal-400"></i> Europe PMC</span>
+                    </div>
+                </div>
+
+                <!-- Right: 3-Phone Showcase Mockup (Tight Spacing, Straight Main Center Phone, Angled Left & Right Side Phones) -->
+                <div class="lg:col-span-6 flex flex-col items-center justify-center py-4">
+                    
+                    <!-- 3-Phone Stage with tight overlap -->
+                    <div class="showcase-stage flex items-center justify-center -space-x-12 sm:-space-x-16">
+                        
+                        <!-- Left Angled Phone (Previous screen in cycle) -->
+                        <div class="phone-left overflow-hidden">
+                            <div class="phone-speaker"></div>
+                            <div class="relative w-full aspect-[9/19.2] bg-slate-950 overflow-hidden">
+                                <img id="mockup-img-left" src="screenshots/05_ai_chat.png" alt="Previous Screen Preview" class="w-full h-full object-cover transition-opacity duration-300" />
+                            </div>
+                        </div>
+
+                        <!-- Main Center Phone (Active rotating screen) -->
+                        <div class="phone-center overflow-hidden">
+                            <div class="phone-speaker"></div>
+                            <div class="phone-camera"></div>
+                            
+                            <div class="relative w-full aspect-[9/19.2] bg-slate-950 overflow-hidden flex items-center justify-center">
+                                <img id="mockup-img-center" src="screenshots/01_home.png" alt="Active Screen Preview" class="w-full h-full object-cover transition-opacity duration-300" />
+                            </div>
+                        </div>
+
+                        <!-- Right Angled Phone (Next screen in cycle) -->
+                        <div class="phone-right overflow-hidden">
+                            <div class="phone-speaker"></div>
+                            <div class="relative w-full aspect-[9/19.2] bg-slate-950 overflow-hidden">
+                                <img id="mockup-img-right" src="screenshots/02_search.png" alt="Next Screen Preview" class="w-full h-full object-cover transition-opacity duration-300" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- 5 Screen Switcher Control Pills -->
+                    <div class="flex items-center justify-center gap-1.5 mt-6 flex-wrap max-w-sm z-20">
+                        <button onclick="setScreen(0)" class="screen-btn px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all bg-teal-500/20 text-teal-700 dark:text-teal-300 border border-teal-500/40 shadow-sm shadow-teal-500/20" data-index="0">1. Home</button>
+                        <button onclick="setScreen(1)" class="screen-btn px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all bg-slate-200 dark:bg-slate-800/80 text-slate-700 dark:text-slate-400 border border-slate-300 dark:border-slate-700/60 hover:text-slate-900 dark:hover:text-white" data-index="1">2. Search</button>
+                        <button onclick="setScreen(2)" class="screen-btn px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all bg-slate-200 dark:bg-slate-800/80 text-slate-700 dark:text-slate-400 border border-slate-300 dark:border-slate-700/60 hover:text-slate-900 dark:hover:text-white" data-index="2">3. Compare</button>
+                        <button onclick="setScreen(3)" class="screen-btn px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all bg-slate-200 dark:bg-slate-800/80 text-slate-700 dark:text-slate-400 border border-slate-300 dark:border-slate-700/60 hover:text-slate-900 dark:hover:text-white" data-index="3">4. Dossier</button>
+                        <button onclick="setScreen(4)" class="screen-btn px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all bg-slate-200 dark:bg-slate-800/80 text-slate-700 dark:text-slate-400 border border-slate-300 dark:border-slate-700/60 hover:text-slate-900 dark:hover:text-white" data-index="4">5. Bio AI</button>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 2. CORE FEATURES WITH ANIMATED SVG ILLUSTRATIONS -->
+        <section id="features" class="py-16 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-slate-800/60">
+            <div class="text-center max-w-2xl mx-auto mb-14">
+                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white mb-3">Engineered for Molecular Discovery</h2>
+                <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">Six computational modules unifying structural biology, machine learning predictions, and lab evidence management.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                
+                <!-- Card 1: 3D Protein Helix -->
+                <div class="glass-panel glass-card-hover p-6 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-teal-100 dark:bg-teal-950/80 border border-teal-300 dark:border-teal-500/30 flex items-center justify-center mb-4 text-teal-600 dark:text-teal-400 svg-glow">
+                            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M2 15c6.667-6 13.333 0 20-6" class="animate-pulse-slow"/>
+                                <path d="M9 22c1.798-1.998 2.518-3.995 2.807-5.993"/>
+                                <path d="M15 2c-1.798 1.998-2.518 3.995-2.807 5.993"/>
+                                <path d="M17 6l-2.5-2.5"/>
+                                <path d="M14 8l-1-1"/>
+                                <path d="M7 18l2.5 2.5"/>
+                                <path d="M3.5 14.5l.5.5"/>
+                                <path d="M20 9.5l.5.5"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">AlphaFold 3D & Confidence</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
+                            Hardware-accelerated WebGL viewer rendering atomic coordinates with 4-tier pLDDT color ramps (Dark Blue >90 to Orange <50 IDR regions).
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2: Dual Pairwise Comparator -->
+                <div class="glass-panel glass-card-hover p-6 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-cyan-100 dark:bg-cyan-950/80 border border-cyan-300 dark:border-cyan-500/30 flex items-center justify-center mb-4 text-cyan-600 dark:text-cyan-400 svg-glow">
+                            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="12" y1="3" x2="12" y2="21" stroke-dasharray="2 2"/>
+                                <circle cx="6" cy="12" r="4" fill="rgba(6,182,212,0.15)"/>
+                                <circle cx="18" cy="12" r="4" fill="rgba(20,184,166,0.15)"/>
+                                <path d="M9 10l6 4"/>
+                                <path d="M9 14l6-4"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">Pairwise Protein Comparator</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
+                            Side-by-side metric diffs: sequence length, mean pLDDT confidence variance, shared InterPro functional motifs, and literature citations.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3: Multi-Note Evidence Board -->
+                <div class="glass-panel glass-card-hover p-6 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-emerald-100 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-500/30 flex items-center justify-center mb-4 text-emerald-600 dark:text-emerald-400 svg-glow">
+                            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/>
+                                <rect x="8" y="2" width="8" height="4" rx="1" ry="1"/>
+                                <path d="M9 12h6"/>
+                                <path d="M9 16h4"/>
+                                <circle cx="17" cy="16" r="1" fill="currentColor"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">Multi-Note Evidence Board</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
+                            Attach multiple custom observations, mutation checkpoints, and literature tags per protein. Edit, update, and manage your ongoing lab notes effortlessly.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 4: Publication PDF Dossiers -->
+                <div class="glass-panel glass-card-hover p-6 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-amber-100 dark:bg-amber-950/80 border border-amber-300 dark:border-amber-500/30 flex items-center justify-center mb-4 text-amber-600 dark:text-amber-400 svg-glow">
+                            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
+                                <polyline points="10 9 9 9 8 9"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">Publication-Ready PDF Export</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
+                            Compile multi-page vector PDF dossiers complete with metadata sheets (Researcher, Lab, Project ID), structural metrics, and evidence tables.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 5: Bio AI Assistant -->
+                <div class="glass-panel glass-card-hover p-6 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-violet-100 dark:bg-violet-950/80 border border-violet-300 dark:border-violet-500/30 flex items-center justify-center mb-4 text-violet-600 dark:text-violet-400 svg-glow">
+                            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/>
+                                <circle cx="12" cy="12" r="3" fill="rgba(167,139,250,0.3)"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">Bio AI Research Assistant</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
+                            AI-guided scientific exploration covering disease phenotypes, catalytic domains, structural reasoning, and Europe PMC literature queries.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 6: Offline Hive Local Storage -->
+                <div class="glass-panel glass-card-hover p-6 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
+                    <div>
+                        <div class="w-12 h-12 rounded-xl bg-rose-100 dark:bg-rose-950/80 border border-rose-300 dark:border-rose-500/30 flex items-center justify-center mb-4 text-rose-600 dark:text-rose-400 svg-glow">
+                            <svg class="w-7 h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                                <ellipse cx="12" cy="5" rx="9" ry="3"/>
+                                <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/>
+                                <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+                            </svg>
+                        </div>
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">Offline Local Hive Database</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
+                            100% private and offline-first. All bookmarks, workspaces, custom notes, and educational guides persist locally without cloud dependencies.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 3. pLDDT CONFIDENCE SCIENTIFIC REFERENCE GUIDE -->
+        <section id="plddt-guide" class="py-16 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-slate-800/60">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white mb-3">AlphaFold pLDDT Metric System</h2>
+                <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">Standardized color scales and biological interpretation for predicted per-residue coordinates.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                
+                <!-- High Confidence -->
+                <div class="p-5 rounded-2xl bg-blue-100/60 dark:bg-blue-950/40 border border-blue-300 dark:border-blue-600/40">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-mono font-bold text-blue-700 dark:text-blue-400 bg-blue-200/80 dark:bg-blue-900/60 px-2 py-0.5 rounded">pLDDT &gt; 90</span>
+                        <span class="w-3 h-3 rounded-full bg-blue-500 shadow-lg shadow-blue-500/50"></span>
+                    </div>
+                    <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-1">Very High Confidence</h4>
+                    <p class="text-xs text-slate-700 dark:text-slate-300">High-precision backbone and sidechain coordinates suitable for atomic-level drug design.</p>
+                </div>
+
+                <!-- Confident -->
+                <div class="p-5 rounded-2xl bg-cyan-100/60 dark:bg-cyan-950/40 border border-cyan-300 dark:border-cyan-600/40">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-mono font-bold text-cyan-700 dark:text-cyan-400 bg-cyan-200/80 dark:bg-cyan-900/60 px-2 py-0.5 rounded">70 &le; pLDDT &lt; 90</span>
+                        <span class="w-3 h-3 rounded-full bg-cyan-400 shadow-lg shadow-cyan-400/50"></span>
+                    </div>
+                    <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-1">Confident Fold</h4>
+                    <p class="text-xs text-slate-700 dark:text-slate-300">Highly reliable secondary structure backbone topology with correct general fold conformation.</p>
+                </div>
+
+                <!-- Low Confidence -->
+                <div class="p-5 rounded-2xl bg-amber-100/60 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-600/40">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-mono font-bold text-amber-700 dark:text-amber-400 bg-amber-200/80 dark:bg-amber-900/60 px-2 py-0.5 rounded">50 &le; pLDDT &lt; 70</span>
+                        <span class="w-3 h-3 rounded-full bg-amber-400 shadow-lg shadow-amber-400/50"></span>
+                    </div>
+                    <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-1">Low Confidence</h4>
+                    <p class="text-xs text-slate-700 dark:text-slate-300">Flexible loop or link regions; interpret general fold with caution and corroborate with experiments.</p>
+                </div>
+
+                <!-- IDR -->
+                <div class="p-5 rounded-2xl bg-orange-100/60 dark:bg-orange-950/40 border border-orange-300 dark:border-orange-600/40">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="text-xs font-mono font-bold text-orange-700 dark:text-orange-400 bg-orange-200/80 dark:bg-orange-900/60 px-2 py-0.5 rounded">pLDDT &lt; 50</span>
+                        <span class="w-3 h-3 rounded-full bg-orange-500 shadow-lg shadow-orange-500/50"></span>
+                    </div>
+                    <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-1">Very Low / IDR</h4>
+                    <p class="text-xs text-slate-700 dark:text-slate-300">Intrinsically Disordered Region lacking isolated stable 3D structure. Expected in regulatory tails.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- 4. 10 TARGETED, SEO-FRIENDLY FAQS -->
+        <section id="faq" class="py-16 px-4 sm:px-8 max-w-4xl mx-auto border-t border-slate-200 dark:border-slate-800/60">
+            <div class="text-center mb-12">
+                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white mb-3">Frequently Asked Questions</h2>
+                <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">Everything you need to know about BioFold's scientific capabilities, target audience, and data privacy.</p>
+            </div>
+
+            <div class="space-y-3.5">
+                
+                <!-- 1 -->
+                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group" open>
+                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
+                        <span>1. Who should use the BioFold mobile app?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
+                        BioFold is built for university students in biochemistry and biotechnology, academic researchers, bioinformaticians, structural biologists, and pharma scientists who require quick mobile access to AlphaFold 3D structures, UniProt functional data, and literature.
+                    </p>
+                </details>
+
+                <!-- 2 -->
+                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
+                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
+                        <span>2. How does the AlphaFold 3D viewer & pLDDT confidence analysis work?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
+                        BioFold fetches predicted 3D atomic coordinates from the EMBL-EBI AlphaFold DB API. It renders coordinates with WebGL and visualizes per-residue pLDDT scores using standard 4-tier color gradients (>90 Very High, 70–90 Confident, 50–70 Low, <50 Disordered).
+                    </p>
+                </details>
+
+                <!-- 3 -->
+                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
+                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
+                        <span>3. What is the Dual-Protein Pairwise Comparator?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
+                        The Comparator enables researchers to contrast any two proteins (such as TP53 vs p73) side-by-side. It computes sequence length delta, mean pLDDT confidence variances, shared InterPro functional domains, and cross-referenced PubMed literature.
+                    </p>
+                </details>
+
+                <!-- 4 -->
+                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
+                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
+                        <span>4. Can I add multiple notes and mutation logs to a single protein?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
+                        Yes. In the Evidence Board workspace, you can attach multiple custom notes (Mutation checkpoints, Structure observations, Lab findings) to any protein, edit them anytime, and categorize them with custom priorities.
+                    </p>
+                </details>
+
+                <!-- 5 -->
+                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
+                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
+                        <span>5. How do I generate publication-ready PDF dossiers?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
+                        Tap "Export PDF Report" inside your workspace. You can optionally attach Lead Researcher name, Lab/Institution, and Project ID to compile a high-resolution, multi-page vector PDF dossier containing all structural metrics and notes.
+                    </p>
+                </details>
+
+                <!-- 6 -->
+                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
+                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
+                        <span>6. What scientific databases are integrated into BioFold?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
+                        BioFold unifies UniProtKB (Swiss-Prot/TrEMBL), DeepMind AlphaFold DB, RCSB Protein Data Bank (PDB), EMBL-EBI InterPro domain signatures (CDD, PFAM, PROSITE), and Europe PMC scientific literature.
+                    </p>
+                </details>
+
+                <!-- 7 -->
+                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
+                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
+                        <span>7. Does BioFold work without an active internet connection?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
+                        Yes. All saved bookmarks, workspace evidence boards, custom notes, and educational guides are stored in local Hive NoSQL database and remain accessible offline.
+                    </p>
+                </details>
+
+                <!-- 8 -->
+                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
+                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
+                        <span>8. How does the Bio AI Assistant support molecular research?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
+                        Bio AI answers questions regarding protein function, catalytic mechanisms, disease pathways, and AlphaFold confidence interpretation with pre-configured quick-prompt accelerators.
+                    </p>
+                </details>
+
+                <!-- 9 -->
+                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
+                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
+                        <span>9. Is my research data and lab notes kept private?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
+                        Yes. All personal notes, workspace evidence, and bookmarks reside strictly on your local device. BioFold adheres to strict open-science privacy principles without sending private notes to cloud trackers.
+                    </p>
+                </details>
+
+                <!-- 10 -->
+                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
+                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
+                        <span>10. How do I download or install the BioFold app?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
+                        BioFold is available on Google Play Store via package ID <a href="https://play.google.com/store/apps/details?id=com.biofold.biofold_learn" class="text-teal-600 dark:text-teal-400 font-bold hover:underline">com.biofold.biofold_learn</a>. You can also build it directly from source on GitHub.
+                    </p>
+                </details>
+
+            </div>
+        </section>
+
+        <!-- 5. QUICKSTART FOR DEVELOPERS & RESEARCHERS -->
+        <section id="quickstart" class="py-16 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-slate-800/60">
+            <div class="glass-panel p-6 sm:p-10 rounded-3xl border border-teal-500/30">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+                    <div class="lg:col-span-6 space-y-4">
+                        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">Open Source & Extensible</h2>
+                        <p class="text-slate-700 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
+                            BioFold is fully open-source under the MIT license. Clone the repository, configure your Flutter environment, and customize research modules or data connectors for your lab.
+                        </p>
+                        <div class="flex flex-wrap gap-3 pt-2">
+                            <a href="https://github.com/coderbaba0/biofold" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl text-xs font-bold text-white bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 border border-slate-700 transition-all flex items-center gap-2">
+                                <svg class="w-4 h-4 fill-current text-teal-400" viewBox="0 0 24 24">
+                                    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
+                                </svg>
+                                <span>Clone on GitHub</span>
+                            </a>
+                            <a href="https://play.google.com/store/apps/details?id=com.biofold.biofold_learn" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-xl text-xs font-bold text-slate-950 bg-teal-400 hover:bg-teal-300 transition-all flex items-center gap-2">
+                                <i data-lucide="download" class="w-4 h-4"></i>
+                                <span>Get on Play Store</span>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="lg:col-span-6 bg-slate-950 rounded-2xl p-5 border border-slate-800 font-mono text-xs shadow-xl">
+                        <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-800 text-slate-400 text-[11px]">
+                            <span>terminal</span>
+                            <span>bash</span>
+                        </div>
+                        <div class="space-y-2 text-slate-300">
+                            <p><span class="text-teal-400">$</span> git clone https://github.com/coderbaba0/biofold.git</p>
+                            <p><span class="text-teal-400">$</span> cd biofold</p>
+                            <p><span class="text-teal-400">$</span> flutter pub get</p>
+                            <p><span class="text-teal-400">$</span> flutter run</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 6. CONTACT & SUPPORT SECTION -->
+        <section id="contact" class="py-16 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-slate-800/60">
+            <div class="glass-panel p-8 sm:p-10 rounded-3xl border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div class="space-y-2 text-center sm:text-left">
+                    <h3 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">Have Questions or Feature Requests?</h3>
+                    <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">Reach out directly to the core development & research team for support, institutional partnerships, or data suggestions.</p>
+                </div>
+                <a href="mailto:theflutterfever@gmail.com" class="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm text-white bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 border border-slate-700 transition-all flex items-center gap-2.5 shadow-md shrink-0 hover:scale-105">
+                    <i data-lucide="mail" class="w-4 h-4 text-teal-400"></i>
+                    <span>theflutterfever@gmail.com</span>
+                </a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-slate-200 dark:border-slate-800/80 py-10 px-4 sm:px-8 text-center text-xs text-slate-500">
+        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <i data-lucide="atom" class="w-4 h-4 text-teal-600 dark:text-teal-400 animate-spin-slow"></i>
+                <span class="font-bold tracking-wider text-slate-800 dark:text-slate-300 uppercase">BIOFOLD</span>
+                <span>— Open Science Structural Biology</span>
+            </div>
+            <div class="flex items-center gap-6">
+                <a href="mailto:theflutterfever@gmail.com" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors flex items-center gap-1.5 font-medium">
+                    <i data-lucide="mail" class="w-3.5 h-3.5"></i>
+                    <span>theflutterfever@gmail.com</span>
+                </a>
+                <a href="https://play.google.com/store/apps/details?id=com.biofold.biofold_learn" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors">Google Play</a>
+                <a href="https://github.com/coderbaba0/biofold" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors">GitHub</a>
+                <a href="https://github.com/coderbaba0/biofold/blob/main/LICENSE" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors">MIT License</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Interactive Molecular Simulation Background & Dynamic Logic -->
+    <script>
+        // 1. Initialize Icons
+        lucide.createIcons();
+
+        // 2. Dark / Light Theme Toggle Logic (Default: Light Mode)
+        function initTheme() {
+            const savedTheme = localStorage.getItem('biofold-theme') || 'light';
+            if (savedTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+                document.getElementById('theme-icon-moon').classList.add('hidden');
+                document.getElementById('theme-icon-sun').classList.remove('hidden');
+            } else {
+                document.documentElement.classList.remove('dark');
+                document.getElementById('theme-icon-moon').classList.remove('hidden');
+                document.getElementById('theme-icon-sun').classList.add('hidden');
+            }
+        }
+
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.toggle('dark');
+            if (isDark) {
+                localStorage.setItem('biofold-theme', 'dark');
+                document.getElementById('theme-icon-moon').classList.add('hidden');
+                document.getElementById('theme-icon-sun').classList.remove('hidden');
+            } else {
+                localStorage.setItem('biofold-theme', 'light');
+                document.getElementById('theme-icon-moon').classList.remove('hidden');
+                document.getElementById('theme-icon-sun').classList.add('hidden');
+            }
+        }
+        initTheme();
+
+        // 3. Interactive Molecular Background Simulation Canvas
+        const canvas = document.getElementById('molecule-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        const particles = [];
+        // Adjusted comfortable particle density (clean & smooth)
+        const particleCount = Math.min(Math.floor(window.innerWidth / 22), 62);
+        const maxDistance = 135;
+
+        // Scientific molecular labels for amino acids, alpha-carbons & structural motifs
+        const molecularLabels = [
+            'Cα (Arg-282)', 'Cα (Lys-120)', 'Cα (Cys-135)', 'Cα (Tyr-220)',
+            'Cα (Gly-245)', 'Cα (Ser-315)', 'Cα (His-179)', 'Cα (Phe-113)',
+            'α-Helix Core', 'β-Sheet Ridge', 'Zinc Finger (Zn²⁺)', 'N-Terminus',
+            'C-Terminus', 'pLDDT 94.8', 'pLDDT 89.2', 'H-Bond (N-H··O)',
+            'Catalytic Triad', 'Disulfide (S-S)', 'UniProt P04637', 'PDB 1TUP'
+        ];
+
+        const mouse = {
+            x: null,
+            y: null,
+            radius: 220
+        };
+
+        window.addEventListener('mousemove', (e) => {
+            mouse.x = e.clientX;
+            mouse.y = e.clientY;
+        });
+
+        window.addEventListener('mouseleave', () => {
+            mouse.x = null;
+            mouse.y = null;
+        });
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        // Particle constructor
+        class Particle {
+            constructor(label) {
+                this.x = Math.random() * width;
+                this.y = Math.random() * height;
+                this.vx = (Math.random() - 0.5) * 0.75;
+                this.vy = (Math.random() - 0.5) * 0.75;
+                this.radius = Math.random() * 2.4 + 1.6;
+                this.label = label || molecularLabels[Math.floor(Math.random() * molecularLabels.length)];
+                
+                const colors = [
+                    { r: 13, g: 148, b: 136 },  // Teal
+                    { r: 20, g: 184, b: 166 },  // Light Teal
+                    { r: 6, g: 182, b: 212 },   // Cyan
+                    { r: 16, g: 185, b: 129 },  // Emerald
+                    { r: 99, g: 102, b: 241 }   // Indigo
+                ];
+                this.color = colors[Math.floor(Math.random() * colors.length)];
+                this.baseAlpha = Math.random() * 0.45 + 0.45;
+            }
+
+            update() {
+                this.x += this.vx;
+                this.y += this.vy;
+
+                if (this.x < 0 || this.x > width) this.vx = -this.vx;
+                if (this.y < 0 || this.y > height) this.vy = -this.vy;
+
+                if (mouse.x !== null && mouse.y !== null) {
+                    const dx = mouse.x - this.x;
+                    const dy = mouse.y - this.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < mouse.radius) {
+                        const force = (mouse.radius - distance) / mouse.radius;
+                        const angle = Math.atan2(dy, dx);
+                        this.x -= Math.cos(angle) * force * 2.0;
+                        this.y -= Math.sin(angle) * force * 2.0;
+                    }
+                }
+            }
+
+            draw(isDark) {
+                const alpha = isDark ? this.baseAlpha : this.baseAlpha * 0.85;
+                
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${alpha})`;
+                ctx.fill();
+
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.radius * 2.2, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(${this.color.r}, ${this.color.g}, ${this.color.b}, ${alpha * 0.18})`;
+                ctx.fill();
+
+                // Mouse Sensor Hover Label
+                if (mouse.x !== null && mouse.y !== null) {
+                    const dx = mouse.x - this.x;
+                    const dy = mouse.y - this.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < mouse.radius * 0.85) {
+                        const labelAlpha = (1 - distance / (mouse.radius * 0.85));
+                        
+                        ctx.save();
+                        ctx.font = '600 10px "Fira Code", monospace';
+                        
+                        const textWidth = ctx.measureText(this.label).width;
+                        const px = this.x + 8;
+                        const py = this.y - 8;
+
+                        ctx.fillStyle = isDark 
+                            ? `rgba(15, 23, 42, ${labelAlpha * 0.9})` 
+                            : `rgba(255, 255, 255, ${labelAlpha * 0.95})`;
+                        ctx.strokeStyle = isDark 
+                            ? `rgba(45, 212, 191, ${labelAlpha * 0.6})` 
+                            : `rgba(13, 148, 136, ${labelAlpha * 0.7})`;
+                        ctx.lineWidth = 1;
+
+                        ctx.beginPath();
+                        ctx.roundRect(px - 4, py - 11, textWidth + 8, 15, 4);
+                        ctx.fill();
+                        ctx.stroke();
+
+                        ctx.fillStyle = isDark 
+                            ? `rgba(94, 234, 212, ${labelAlpha})` 
+                            : `rgba(15, 118, 110, ${labelAlpha})`;
+                        ctx.fillText(this.label, px, py);
+                        ctx.restore();
+                    }
+                }
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle(molecularLabels[i % molecularLabels.length]));
+        }
+
+        function animateMolecules() {
+            ctx.clearRect(0, 0, width, height);
+
+            const isDark = document.documentElement.classList.contains('dark');
+            const lineBaseAlpha = isDark ? 0.22 : 0.16;
+            const mouseLineAlpha = isDark ? 0.45 : 0.35;
+
+            for (let a = 0; a < particles.length; a++) {
+                for (let b = a + 1; b < particles.length; b++) {
+                    const dx = particles[a].x - particles[b].x;
+                    const dy = particles[a].y - particles[b].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+
+                    if (dist < maxDistance) {
+                        const alpha = (1 - dist / maxDistance) * lineBaseAlpha;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(particles[b].x, particles[b].y);
+                        ctx.strokeStyle = isDark 
+                            ? `rgba(20, 184, 166, ${alpha})` 
+                            : `rgba(13, 148, 136, ${alpha * 1.2})`;
+                        ctx.lineWidth = 1.0;
+                        ctx.stroke();
+                    }
+                }
+
+                if (mouse.x !== null && mouse.y !== null) {
+                    const mdx = particles[a].x - mouse.x;
+                    const mdy = particles[a].y - mouse.y;
+                    const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+
+                    if (mdist < mouse.radius) {
+                        const mAlpha = (1 - mdist / mouse.radius) * mouseLineAlpha;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[a].x, particles[a].y);
+                        ctx.lineTo(mouse.x, mouse.y);
+                        ctx.strokeStyle = isDark 
+                            ? `rgba(94, 234, 212, ${mAlpha})` 
+                            : `rgba(15, 118, 110, ${mAlpha * 1.3})`;
+                        ctx.lineWidth = 1.4;
+                        ctx.stroke();
+                    }
+                }
+
+                particles[a].update();
+                particles[a].draw(isDark);
+            }
+
+            requestAnimationFrame(animateMolecules);
+        }
+        animateMolecules();
+
+        // 4. 5 Real App Screen Data Definitions with 3-Line Half-Theme Headlines & Rich Descriptions
+        const screens = [
+            {
+                image: "screenshots/01_home.png",
+                titleHtml: '<span class="text-slate-900 dark:text-white">AlphaFold 3D Explorer</span><br/><span class="text-slate-900 dark:text-white">Molecular Structures</span><br/><span class="gradient-text">&amp; Confidence Metrics.</span>',
+                desc: "BioFold unifies <strong>AlphaFold 3D predictions</strong>, <strong>UniProtKB Swiss-Prot annotations</strong>, <strong>InterPro functional domains</strong>, and <strong>Europe PMC open literature</strong> into a high-performance, offline-ready research dossier platform designed for molecular biologists and bioinformaticians."
+            },
+            {
+                image: "screenshots/02_search.png",
+                titleHtml: '<span class="text-slate-900 dark:text-white">Multi-Database Retrieval</span><br/><span class="text-slate-900 dark:text-white">UniProtKB &amp; RCSB PDB</span><br/><span class="gradient-text">Unified Search Engine.</span>',
+                desc: "Instantly query across <strong>200M+ protein accessions</strong>, organism taxons, active catalytic sites, and structural literature. Filter by validation quality, reviewed Swiss-Prot entries, and experimental resolution."
+            },
+            {
+                image: "screenshots/03_compare.png",
+                titleHtml: '<span class="text-slate-900 dark:text-white">Pairwise Homology</span><br/><span class="text-slate-900 dark:text-white">Dual-Protein Analysis</span><br/><span class="gradient-text">&amp; Sequence Variances.</span>',
+                desc: "Select and contrast any two proteins side-by-side (e.g. TP53 vs p73). Compute sequence length variance, <strong>mean pLDDT confidence deltas</strong>, shared conserved InterPro functional domains, and cross-referenced PubMed citations with one tap."
+            },
+            {
+                image: "screenshots/04_compare_result.png",
+                titleHtml: '<span class="text-slate-900 dark:text-white">Publication Dossier</span><br/><span class="text-slate-900 dark:text-white">Multi-Note Evidence</span><br/><span class="gradient-text">&amp; Vector PDF Reports.</span>',
+                desc: "Attach multiple structured notes (Mutation checkpoints, Structural observations, Lab findings) to any protein. Compile and export high-resolution, multi-page vector PDF research dossiers complete with Lead Researcher and Lab metadata."
+            },
+            {
+                image: "screenshots/05_ai_chat.png",
+                titleHtml: '<span class="text-slate-900 dark:text-white">Bio AI Assistant</span><br/><span class="text-slate-900 dark:text-white">Molecular Intelligence</span><br/><span class="gradient-text">&amp; Literature Synthesis.</span>',
+                desc: "Engage with an AI assistant specialized in molecular biology. Explore disease pathways, catalytic mechanisms, and AlphaFold confidence interpretation with pre-configured research prompt chips and real-time citation matching."
+            }
+        ];
+
+        let currentIndex = 0;
+        let autoPlayTimer = null;
+
+        const mockupImgCenter = document.getElementById('mockup-img-center');
+        const mockupImgLeft = document.getElementById('mockup-img-left');
+        const mockupImgRight = document.getElementById('mockup-img-right');
+        const heroTitleContainer = document.getElementById('hero-title-container');
+        const heroDesc = document.getElementById('hero-desc');
+        const screenBtns = document.querySelectorAll('.screen-btn');
+
+        function updateScreenDisplay(index) {
+            const current = screens[index];
+            const prevIndex = (index - 1 + screens.length) % screens.length;
+            const nextIndex = (index + 1) % screens.length;
+
+            // 1. Cross-fade center, left, and right images
+            mockupImgCenter.style.opacity = '0';
+            mockupImgLeft.style.opacity = '0';
+            mockupImgRight.style.opacity = '0';
+
+            setTimeout(() => {
+                mockupImgCenter.src = current.image;
+                mockupImgLeft.src = screens[prevIndex].image;
+                mockupImgRight.src = screens[nextIndex].image;
+
+                mockupImgCenter.style.opacity = '1';
+                mockupImgLeft.style.opacity = '1';
+                mockupImgRight.style.opacity = '1';
+            }, 180);
+
+            // 2. Animate left-side copy
+            heroTitleContainer.style.opacity = '0';
+            heroTitleContainer.style.transform = 'translateY(6px)';
+            heroDesc.style.opacity = '0';
+
+            setTimeout(() => {
+                heroTitleContainer.innerHTML = current.titleHtml;
+                heroDesc.innerHTML = current.desc;
+
+                heroTitleContainer.style.opacity = '1';
+                heroTitleContainer.style.transform = 'translateY(0px)';
+                heroDesc.style.opacity = '1';
+            }, 200);
+
+            // 3. Update button highlights
+            screenBtns.forEach((btn, idx) => {
+                if (idx === index) {
+                    btn.className = 'screen-btn px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all bg-teal-500/20 text-teal-700 dark:text-teal-300 border border-teal-500/40 shadow-sm shadow-teal-500/20';
+                } else {
+                    btn.className = 'screen-btn px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all bg-slate-200 dark:bg-slate-800/80 text-slate-700 dark:text-slate-400 border border-slate-300 dark:border-slate-700/60 hover:text-slate-900 dark:hover:text-white';
+                }
+            });
+        }
+
+        function setScreen(index) {
+            currentIndex = index;
+            updateScreenDisplay(currentIndex);
+            resetAutoPlay();
+        }
+
+        function nextScreen() {
+            currentIndex = (currentIndex + 1) % screens.length;
+            updateScreenDisplay(currentIndex);
+        }
+
+        function startAutoPlay() {
+            autoPlayTimer = setInterval(nextScreen, 4000);
+        }
+
+        function resetAutoPlay() {
+            clearInterval(autoPlayTimer);
+            startAutoPlay();
+        }
+
+        // Start cycle on load
+        startAutoPlay();
+    </script>
+</body>
+</html>
