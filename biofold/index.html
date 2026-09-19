@@ -2,13 +2,13 @@
 <html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
     
     <!-- Primary Meta Tags -->
     <title>BIOFOLD - AI-Powered Structural Biology & Proteome Intelligence Platform</title>
     <meta name="title" content="BIOFOLD - AI-Powered Structural Biology & Proteome Intelligence Platform">
-    <meta name="description" content="Explore AlphaFold 3D protein structures, analyze residue pLDDT confidence scores, perform dual-protein pairwise comparisons, and generate publication-ready PDF research dossiers on mobile.">
-    <meta name="keywords" content="BIOFOLD, AlphaFold, UniProt, RCSB PDB, Protein Structure, Bioinformatics, pLDDT Confidence, Molecular Biology, InterPro, Europe PMC, Flutter Bioinformatics App, Open Science">
+    <meta name="description" content="Explore AlphaFold 3D protein structures, analyze residue pLDDT confidence scores, perform dual-protein pairwise comparisons, run in-silico mutation shockwave & pH titration, and generate publication-ready PDF research dossiers on mobile.">
+    <meta name="keywords" content="BIOFOLD, AlphaFold, UniProt, RCSB PDB, Protein Structure, Bioinformatics, pLDDT Confidence, Molecular Biology, Mutation Shockwave, pH Titration, Isoelectric Point, InterPro, Europe PMC, Flutter Bioinformatics App, Open Science">
     <meta name="author" content="BioFold Development Team">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://coderbaba0.github.io/biofold/">
@@ -21,14 +21,14 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://coderbaba0.github.io/biofold/">
     <meta property="og:title" content="BIOFOLD - Next-Gen Structural Biology & Proteome Intelligence">
-    <meta property="og:description" content="Unified mobile research platform integrating AlphaFold 3D predictions, UniProt annotations, InterPro domains, and automated publication-ready PDF research dossiers.">
+    <meta property="og:description" content="Unified mobile research platform integrating AlphaFold 3D predictions, UniProt annotations, in-silico biophysical engines, and automated publication-ready PDF dossiers.">
     <meta property="og:image" content="screenshots/01_home.png">
 
     <!-- Twitter Card -->
     <meta property="twitter:card" content="summary_large_image">
     <meta property="twitter:url" content="https://coderbaba0.github.io/biofold/">
     <meta property="twitter:title" content="BIOFOLD - AI-Powered Structural Biology Suite">
-    <meta property="twitter:description" content="Explore AlphaFold 3D structures, analyze pLDDT confidence, compare protein homologs, and manage multi-note evidence boards.">
+    <meta property="twitter:description" content="Explore AlphaFold 3D structures, analyze pLDDT confidence, compute pH curves, and test missense variants offline.">
     <meta property="twitter:image" content="screenshots/01_home.png">
 
     <!-- Google Fonts -->
@@ -105,9 +105,10 @@
     </script>
 
     <style>
-        body {
-            font-family: 'Plus Jakarta Sans', sans-serif;
+        html, body {
+            max-width: 100%;
             overflow-x: hidden;
+            font-family: 'Plus Jakarta Sans', sans-serif;
             transition: background-color 0.3s ease, color 0.3s ease;
         }
 
@@ -117,14 +118,19 @@
             color: #0F172A;
         }
         html:not(.dark) .glass-panel {
-            background: rgba(255, 255, 255, 0.88);
+            background: rgba(255, 255, 255, 0.9);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(15, 23, 42, 0.09);
             box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.05);
         }
+        html:not(.dark) .glass-card-hover:hover {
+            border-color: rgba(13, 148, 136, 0.4);
+            box-shadow: 0 16px 36px -10px rgba(13, 148, 136, 0.12);
+            transform: translateY(-3px);
+        }
         html:not(.dark) .glow-radial {
-            background: radial-gradient(circle at 50% 20%, rgba(13, 148, 136, 0.08), transparent 65%);
+            background: radial-gradient(circle at 50% 25%, rgba(13, 148, 136, 0.12) 0%, rgba(248, 250, 252, 0) 70%);
         }
         html:not(.dark) .gradient-text {
             background: linear-gradient(135deg, #0F766E 0%, #0D9488 50%, #047857 100%);
@@ -135,47 +141,36 @@
         /* Dark Mode Theme Styles */
         html.dark body {
             background-color: #070B14;
-            color: #F1F5F9;
+            color: #F8FAFC;
         }
         html.dark .glass-panel {
             background: rgba(15, 23, 42, 0.75);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
             border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.7);
+        }
+        html.dark .glass-card-hover:hover {
+            border-color: rgba(45, 212, 191, 0.4);
+            box-shadow: 0 20px 40px -15px rgba(13, 148, 136, 0.3);
+            transform: translateY(-3px);
         }
         html.dark .glow-radial {
-            background: radial-gradient(circle at 50% 20%, rgba(13, 148, 136, 0.14), transparent 65%);
+            background: radial-gradient(circle at 50% 20%, rgba(13, 148, 136, 0.22) 0%, rgba(7, 11, 20, 0) 70%);
         }
         html.dark .gradient-text {
-            background: linear-gradient(135deg, #5EEAD4 0%, #14B8A6 60%, #059669 100%);
+            background: linear-gradient(135deg, #2DD4BF 0%, #14B8A6 50%, #5EEAD4 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .glass-card-hover {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .glass-card-hover:hover {
-            transform: translateY(-4px);
-            border-color: rgba(94, 234, 212, 0.4);
-            box-shadow: 0 14px 30px -10px rgba(13, 148, 136, 0.22);
-        }
-
-        /* 3-Phone Showcase Styling */
-        .showcase-stage {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            user-select: none;
-        }
-
-        /* Main Center Phone */
+        /* Mobile-First Responsive Phone Stage */
         .phone-center {
-            width: 220px;
-            border: 6px solid #0F172A;
-            border-radius: 34px;
-            box-shadow: 0 30px 65px -15px rgba(15, 23, 42, 0.35), 0 0 35px rgba(13, 148, 136, 0.2);
+            width: 235px;
+            max-width: 80vw;
+            border: 5px solid #0F172A;
+            border-radius: 32px;
+            box-shadow: 0 25px 60px -15px rgba(15, 23, 42, 0.35), 0 0 35px rgba(13, 148, 136, 0.2);
             position: relative;
             background: #070B14;
             z-index: 20;
@@ -186,44 +181,49 @@
             box-shadow: 0 25px 60px -12px rgba(0, 0, 0, 0.9), 0 0 35px rgba(13, 148, 136, 0.3);
         }
 
-        /* Left Angled Side Phone */
+        /* Side Phones for tablet/desktop */
         .phone-left {
-            width: 185px;
-            border: 4.5px solid #1E293B;
-            border-radius: 28px;
-            position: relative;
-            background: #070B14;
-            z-index: 10;
-            transform: rotate(-9deg) translateY(18px) scale(0.91);
-            opacity: 0.65;
-            box-shadow: -15px 20px 40px -10px rgba(15, 23, 42, 0.25);
-            transition: all 0.4s ease;
+            display: none;
         }
-        html.dark .phone-left {
-            box-shadow: -15px 20px 40px -10px rgba(0, 0, 0, 0.7);
-        }
-
-        /* Right Angled Side Phone */
         .phone-right {
-            width: 185px;
-            border: 4.5px solid #1E293B;
-            border-radius: 28px;
-            position: relative;
-            background: #070B14;
-            z-index: 10;
-            transform: rotate(9deg) translateY(18px) scale(0.91);
-            opacity: 0.65;
-            box-shadow: 15px 20px 40px -10px rgba(15, 23, 42, 0.25);
-            transition: all 0.4s ease;
-        }
-        html.dark .phone-right {
-            box-shadow: 15px 20px 40px -10px rgba(0, 0, 0, 0.7);
+            display: none;
         }
 
         @media (min-width: 640px) {
-            .phone-center { width: 245px; border-width: 7px; border-radius: 36px; }
-            .phone-left { width: 205px; border-width: 5px; border-radius: 30px; }
-            .phone-right { width: 205px; border-width: 5px; border-radius: 30px; }
+            .phone-center { 
+                width: 245px; 
+                border-width: 7px; 
+                border-radius: 36px; 
+            }
+            .phone-left {
+                display: block;
+                width: 190px;
+                border: 4.5px solid #1E293B;
+                border-radius: 28px;
+                position: relative;
+                background: #070B14;
+                z-index: 10;
+                transform: rotate(-9deg) translateY(18px) scale(0.91);
+                opacity: 0.65;
+                box-shadow: -15px 20px 40px -10px rgba(15, 23, 42, 0.25);
+                transition: all 0.4s ease;
+            }
+            .phone-right {
+                display: block;
+                width: 190px;
+                border: 4.5px solid #1E293B;
+                border-radius: 28px;
+                position: relative;
+                background: #070B14;
+                z-index: 10;
+                transform: rotate(9deg) translateY(18px) scale(0.91);
+                opacity: 0.65;
+                box-shadow: 15px 20px 40px -10px rgba(15, 23, 42, 0.25);
+                transition: all 0.4s ease;
+            }
+            html.dark .phone-left, html.dark .phone-right {
+                box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.7);
+            }
         }
 
         .phone-speaker {
@@ -272,32 +272,34 @@
 
     <!-- Ambient Glow Backgrounds -->
     <div class="fixed inset-0 glow-radial pointer-events-none z-0"></div>
-    <div class="fixed top-[-10%] left-[-10%] w-[500px] h-[500px] bg-teal-600/10 rounded-full blur-[140px] pointer-events-none z-0"></div>
-    <div class="fixed bottom-[-10%] right-[-10%] w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none z-0"></div>
+    <div class="fixed top-[-10%] left-[-10%] w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-teal-600/10 rounded-full blur-[140px] pointer-events-none z-0"></div>
+    <div class="fixed bottom-[-10%] right-[-10%] w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-indigo-600/10 rounded-full blur-[140px] pointer-events-none z-0"></div>
 
     <!-- Sticky Navigation Bar -->
-    <header class="sticky top-0 z-50 glass-panel border-b border-black/5 dark:border-white/5 py-3 px-4 sm:px-8">
+    <header class="sticky top-0 z-50 glass-panel border-b border-black/5 dark:border-white/5 py-3 px-3 sm:px-8">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <!-- Brand Logo in All Capital Letters with Sleek Letter Spacing (BIOFOLD) -->
-            <a href="#" class="flex items-center gap-2.5 group">
-                <i data-lucide="atom" class="w-7 h-7 text-teal-600 dark:text-teal-400 animate-spin-slow"></i>
-                <span class="text-xl sm:text-2xl font-black tracking-widest text-slate-900 dark:text-white uppercase">BIO<span class="gradient-text">FOLD</span></span>
+            <a href="#" class="flex items-center gap-2 group shrink-0">
+                <i data-lucide="atom" class="w-6 h-6 sm:w-7 sm:h-7 text-teal-600 dark:text-teal-400 animate-spin-slow"></i>
+                <span class="text-lg sm:text-2xl font-black tracking-widest text-slate-900 dark:text-white uppercase">BIO<span class="gradient-text">FOLD</span></span>
             </a>
 
             <!-- Desktop Nav Links -->
-            <nav class="hidden lg:flex items-center gap-8 text-xs font-semibold text-slate-600 dark:text-slate-300">
+            <nav class="hidden lg:flex items-center gap-7 text-xs font-semibold text-slate-600 dark:text-slate-300">
                 <a href="#features" class="hover:text-teal-600 dark:hover:text-teal-300 transition-colors">Features</a>
-                <a href="#plddt-guide" class="hover:text-teal-600 dark:hover:text-teal-300 transition-colors">pLDDT Guide</a>
-                <a href="#faq" class="hover:text-teal-600 dark:hover:text-teal-300 transition-colors">FAQ</a>
+                <a href="#algorithms" class="hover:text-teal-600 dark:hover:text-teal-300 transition-colors">Algorithms</a>
+                <a href="#who-is-it-for" class="hover:text-teal-600 dark:hover:text-teal-300 transition-colors">Audience</a>
+                <a href="#how-to-use" class="hover:text-teal-600 dark:hover:text-teal-300 transition-colors">Workflow</a>
+                <a href="#plddt-guide" class="hover:text-teal-600 dark:hover:text-teal-300 transition-colors">pLDDT Scale</a>
                 <a href="#quickstart" class="hover:text-teal-600 dark:hover:text-teal-300 transition-colors">Quickstart</a>
-                <a href="#contact" class="hover:text-teal-600 dark:hover:text-teal-300 transition-colors">Contact</a>
+                <a href="#faq" class="hover:text-teal-600 dark:hover:text-teal-300 transition-colors">FAQ</a>
             </nav>
 
-            <!-- Action CTAs: Theme Switcher + GitHub (with Inline SVG Icon) + Play Store -->
+            <!-- Action CTAs: Theme Switcher + GitHub (Desktop only) + Google Play (Always visible) -->
             <div class="flex items-center gap-2 sm:gap-3">
                 
                 <!-- Dark / Light Theme Toggle Switcher Button (Default: Light Mode) -->
-                <button id="theme-toggle" onclick="toggleTheme()" class="p-2 sm:px-2.5 sm:py-2 rounded-xl text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white bg-slate-100 dark:bg-slate-800/90 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700/60 transition-all flex items-center justify-center cursor-pointer shadow-sm hover:scale-105" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
+                <button id="theme-toggle" onclick="toggleTheme()" class="p-2 sm:px-2.5 sm:py-2 rounded-xl text-slate-700 dark:text-slate-300 hover:text-slate-950 dark:hover:text-white bg-slate-100 dark:bg-slate-800/90 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700/60 transition-all flex items-center justify-center cursor-pointer shadow-sm" title="Toggle Dark/Light Mode" aria-label="Toggle Theme">
                     <!-- In light mode by default, show moon icon to switch to dark -->
                     <svg id="theme-icon-moon" class="w-4 h-4 text-slate-700 dark:text-teal-300" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
@@ -312,8 +314,8 @@
                     </svg>
                 </button>
 
-                <!-- GitHub Button with Clean Crisp Inline SVG Icon -->
-                <a href="https://github.com/coderbaba0/biofold" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-slate-900 dark:bg-slate-800/90 hover:bg-slate-800 dark:hover:bg-slate-700 border border-slate-800 dark:border-slate-700/60 transition-all hover:scale-[1.02] shadow-sm">
+                <!-- GitHub Button (Hidden on mobile screens, visible on sm and above) -->
+                <a href="https://github.com/coderbaba0/biofold" target="_blank" rel="noopener noreferrer" class="hidden sm:inline-flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-bold text-white bg-slate-900 dark:bg-slate-800/90 hover:bg-slate-800 dark:hover:bg-slate-700 border border-slate-800 dark:border-slate-700/60 transition-all shadow-sm">
                     <svg class="w-4 h-4 fill-current text-white" viewBox="0 0 24 24">
                         <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/>
                     </svg>
@@ -321,11 +323,11 @@
                 </a>
 
                 <!-- Google Play Button -->
-                <a href="https://play.google.com/store/apps/details?id=com.biofold.biofold_learn" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-2 px-3.5 sm:px-4 py-2 rounded-xl text-xs font-bold text-slate-950 bg-gradient-to-r from-teal-300 via-teal-400 to-emerald-400 hover:opacity-95 shadow-lg shadow-teal-500/20 transition-all hover:scale-[1.02]">
-                    <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24">
+                <a href="https://play.google.com/store/apps/details?id=com.biofold.biofold_learn" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-2 rounded-xl text-xs font-bold text-slate-950 bg-gradient-to-r from-teal-300 via-teal-400 to-emerald-400 hover:opacity-95 shadow-lg shadow-teal-500/20 transition-all">
+                    <svg class="w-3.5 h-3.5 fill-current shrink-0" viewBox="0 0 24 24">
                         <path d="M3.609 1.814L13.792 12 3.61 22.186c-.4-.36-.61-.9-.61-1.55V3.364c0-.65.21-1.19.609-1.55zm11.233 11.233L6.208 21.68l9.646-5.57 3.23-1.865-4.242-1.2zm-.001-2.093l4.243-1.2-3.23-1.865-9.646-5.57 8.633 8.635zm5.727 1.047c.65.37.65.98 0 1.35l-3.08 1.78-2.03-2.03 2.03-2.03 3.08 1.78z"/>
                     </svg>
-                    <span>Google Play</span>
+                    <span>Download</span>
                 </a>
             </div>
         </div>
@@ -334,14 +336,14 @@
     <main class="relative z-10">
 
         <!-- 1. HERO SECTION (3-LINE TITLE + 3-PHONE SHOWCASE STAGE) -->
-        <section class="relative pt-8 pb-16 sm:pt-14 sm:pb-24 px-4 sm:px-8 max-w-7xl mx-auto">
+        <section class="relative pt-6 pb-12 sm:pt-14 sm:pb-20 px-4 sm:px-8 max-w-7xl mx-auto">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-center">
                 
                 <!-- Left: 3-Line Title (Half Solid Contrast, Half Theme Color), Substantial Description Aligned with Mobile Frame Height -->
-                <div class="lg:col-span-6 flex flex-col justify-between space-y-6 text-center lg:text-left py-2">
+                <div class="lg:col-span-6 flex flex-col justify-between space-y-5 text-center lg:text-left py-2">
                     
                     <!-- Dynamic 3-Line Main Headline (Half Solid Text, Half Gradient Theme Color) -->
-                    <h1 class="text-3xl sm:text-5xl lg:text-[3.25rem] font-black tracking-tight leading-[1.12] min-h-[120px] sm:min-h-[160px] flex items-center justify-center lg:justify-start">
+                    <h1 class="text-2xl sm:text-4xl lg:text-[3.25rem] font-black tracking-tight leading-[1.15] break-words">
                         <div id="hero-title-container" class="transition-all duration-500 transform">
                             <span class="text-slate-900 dark:text-white">AlphaFold 3D Explorer</span><br />
                             <span class="text-slate-900 dark:text-white">Molecular Structures</span><br />
@@ -350,28 +352,28 @@
                     </h1>
 
                     <!-- Enriched, Professional Description Text with High Contrast in Both Light & Dark -->
-                    <div class="min-h-[110px] sm:min-h-[130px] flex items-center justify-center lg:justify-start">
-                        <p id="hero-desc" class="text-slate-700 dark:text-slate-300 text-sm sm:text-base lg:text-[1.05rem] font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0 transition-all duration-500">
+                    <div>
+                        <p id="hero-desc" class="text-slate-700 dark:text-slate-300 text-xs sm:text-base lg:text-[1.05rem] font-normal leading-relaxed max-w-2xl mx-auto lg:mx-0 transition-all duration-500">
                             BioFold unifies <strong>AlphaFold 3D predictions</strong>, <strong>UniProtKB Swiss-Prot annotations</strong>, <strong>InterPro functional domains</strong>, and <strong>Europe PMC open literature</strong> into a high-performance, offline-ready research dossier platform designed for molecular biologists and bioinformaticians.
                         </p>
                     </div>
 
                     <!-- CTAs -->
-                    <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-1">
-                        <a href="https://play.google.com/store/apps/details?id=com.biofold.biofold_learn" target="_blank" rel="noopener noreferrer" class="px-6 py-3.5 rounded-xl font-bold text-sm text-slate-950 bg-gradient-to-r from-teal-300 via-teal-400 to-emerald-400 hover:shadow-teal-500/25 hover:shadow-xl transition-all flex items-center gap-3 hover:scale-[1.02]">
+                    <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-3 pt-1">
+                        <a href="https://play.google.com/store/apps/details?id=com.biofold.biofold_learn" target="_blank" rel="noopener noreferrer" class="w-full sm:w-auto px-5 py-3 rounded-xl font-bold text-xs sm:text-sm text-slate-950 bg-gradient-to-r from-teal-300 via-teal-400 to-emerald-400 hover:shadow-teal-500/25 hover:shadow-xl transition-all flex items-center justify-center gap-2.5">
                             <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
                                 <path d="M3.609 1.814L13.792 12 3.61 22.186c-.4-.36-.61-.9-.61-1.55V3.364c0-.65.21-1.19.609-1.55zm11.233 11.233L6.208 21.68l9.646-5.57 3.23-1.865-4.242-1.2zm-.001-2.093l4.243-1.2-3.23-1.865-9.646-5.57 8.633 8.635zm5.727 1.047c.65.37.65.98 0 1.35l-3.08 1.78-2.03-2.03 2.03-2.03 3.08 1.78z"/>
                             </svg>
-                            <span>Download on Google Play</span>
+                            <span>Get App on Play Store</span>
                         </a>
-                        <a href="#features" class="px-6 py-3.5 rounded-xl font-bold text-sm text-slate-800 dark:text-white bg-white/90 dark:bg-slate-900/60 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700/80 transition-all flex items-center gap-2 shadow-sm">
+                        <a href="#features" class="w-full sm:w-auto px-5 py-3 rounded-xl font-bold text-xs sm:text-sm text-slate-800 dark:text-white bg-white/90 dark:bg-slate-900/60 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-300 dark:border-slate-700/80 transition-all flex items-center justify-center gap-2 shadow-sm">
                             <i data-lucide="layers" class="w-4 h-4 text-teal-600 dark:text-teal-400"></i>
                             <span>Explore Capabilities</span>
                         </a>
                     </div>
 
                     <!-- Verified Scientific Data Strip -->
-                    <div class="pt-4 border-t border-slate-300 dark:border-slate-800/60 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-slate-600 dark:text-slate-400 text-xs font-semibold">
+                    <div class="pt-3 border-t border-slate-300 dark:border-slate-800/60 flex flex-wrap items-center justify-center lg:justify-start gap-4 sm:gap-6 text-slate-600 dark:text-slate-400 text-[11px] sm:text-xs font-semibold">
                         <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-600 dark:text-teal-400"></i> AlphaFold DB</span>
                         <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-600 dark:text-teal-400"></i> UniProtKB</span>
                         <span class="flex items-center gap-1.5"><i data-lucide="check" class="w-3.5 h-3.5 text-teal-600 dark:text-teal-400"></i> RCSB PDB</span>
@@ -379,13 +381,13 @@
                     </div>
                 </div>
 
-                <!-- Right: 3-Phone Showcase Mockup (Tight Spacing, Straight Main Center Phone, Angled Left & Right Side Phones) -->
-                <div class="lg:col-span-6 flex flex-col items-center justify-center py-4">
+                <!-- Right: Responsive Phone Showcase Mockup -->
+                <div class="lg:col-span-6 flex flex-col items-center justify-center py-2 w-full max-w-full overflow-hidden">
                     
-                    <!-- 3-Phone Stage with tight overlap -->
-                    <div class="showcase-stage flex items-center justify-center -space-x-12 sm:-space-x-16">
+                    <!-- Showcase Stage with responsive spacing -->
+                    <div class="showcase-stage flex items-center justify-center sm:-space-x-14 md:-space-x-16 max-w-full">
                         
-                        <!-- Left Angled Phone (Previous screen in cycle) -->
+                        <!-- Left Angled Phone -->
                         <div class="phone-left overflow-hidden">
                             <div class="phone-speaker"></div>
                             <div class="relative w-full aspect-[9/19.2] bg-slate-950 overflow-hidden">
@@ -393,7 +395,7 @@
                             </div>
                         </div>
 
-                        <!-- Main Center Phone (Active rotating screen) -->
+                        <!-- Main Center Phone -->
                         <div class="phone-center overflow-hidden">
                             <div class="phone-speaker"></div>
                             <div class="phone-camera"></div>
@@ -403,7 +405,7 @@
                             </div>
                         </div>
 
-                        <!-- Right Angled Phone (Next screen in cycle) -->
+                        <!-- Right Angled Phone -->
                         <div class="phone-right overflow-hidden">
                             <div class="phone-speaker"></div>
                             <div class="relative w-full aspect-[9/19.2] bg-slate-950 overflow-hidden">
@@ -414,12 +416,12 @@
                     </div>
 
                     <!-- 5 Screen Switcher Control Pills -->
-                    <div class="flex items-center justify-center gap-1.5 mt-6 flex-wrap max-w-sm z-20">
-                        <button onclick="setScreen(0)" class="screen-btn px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all bg-teal-500/20 text-teal-700 dark:text-teal-300 border border-teal-500/40 shadow-sm shadow-teal-500/20" data-index="0">1. Home</button>
-                        <button onclick="setScreen(1)" class="screen-btn px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all bg-slate-200 dark:bg-slate-800/80 text-slate-700 dark:text-slate-400 border border-slate-300 dark:border-slate-700/60 hover:text-slate-900 dark:hover:text-white" data-index="1">2. Search</button>
-                        <button onclick="setScreen(2)" class="screen-btn px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all bg-slate-200 dark:bg-slate-800/80 text-slate-700 dark:text-slate-400 border border-slate-300 dark:border-slate-700/60 hover:text-slate-900 dark:hover:text-white" data-index="2">3. Compare</button>
-                        <button onclick="setScreen(3)" class="screen-btn px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all bg-slate-200 dark:bg-slate-800/80 text-slate-700 dark:text-slate-400 border border-slate-300 dark:border-slate-700/60 hover:text-slate-900 dark:hover:text-white" data-index="3">4. Dossier</button>
-                        <button onclick="setScreen(4)" class="screen-btn px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all bg-slate-200 dark:bg-slate-800/80 text-slate-700 dark:text-slate-400 border border-slate-300 dark:border-slate-700/60 hover:text-slate-900 dark:hover:text-white" data-index="4">5. Bio AI</button>
+                    <div class="flex items-center justify-center gap-1.5 mt-5 flex-wrap max-w-md z-20 px-2">
+                        <button onclick="setScreen(0)" class="screen-btn px-2.5 py-1 rounded-lg text-[10px] sm:text-[11px] font-bold transition-all bg-teal-500/20 text-teal-700 dark:text-teal-300 border border-teal-500/40 shadow-sm shadow-teal-500/20" data-index="0">1. Home</button>
+                        <button onclick="setScreen(1)" class="screen-btn px-2.5 py-1 rounded-lg text-[10px] sm:text-[11px] font-bold transition-all bg-slate-200 dark:bg-slate-800/80 text-slate-700 dark:text-slate-400 border border-slate-300 dark:border-slate-700/60 hover:text-slate-900 dark:hover:text-white" data-index="1">2. Search</button>
+                        <button onclick="setScreen(2)" class="screen-btn px-2.5 py-1 rounded-lg text-[10px] sm:text-[11px] font-bold transition-all bg-slate-200 dark:bg-slate-800/80 text-slate-700 dark:text-slate-400 border border-slate-300 dark:border-slate-700/60 hover:text-slate-900 dark:hover:text-white" data-index="2">3. Compare</button>
+                        <button onclick="setScreen(3)" class="screen-btn px-2.5 py-1 rounded-lg text-[10px] sm:text-[11px] font-bold transition-all bg-slate-200 dark:bg-slate-800/80 text-slate-700 dark:text-slate-400 border border-slate-300 dark:border-slate-700/60 hover:text-slate-900 dark:hover:text-white" data-index="3">4. Dossier</button>
+                        <button onclick="setScreen(4)" class="screen-btn px-2.5 py-1 rounded-lg text-[10px] sm:text-[11px] font-bold transition-all bg-slate-200 dark:bg-slate-800/80 text-slate-700 dark:text-slate-400 border border-slate-300 dark:border-slate-700/60 hover:text-slate-900 dark:hover:text-white" data-index="4">5. Bio AI</button>
                     </div>
 
                 </div>
@@ -428,13 +430,13 @@
         </section>
 
         <!-- 2. CORE FEATURES WITH ANIMATED SVG ILLUSTRATIONS -->
-        <section id="features" class="py-16 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-slate-800/60">
-            <div class="text-center max-w-2xl mx-auto mb-14">
-                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white mb-3">Engineered for Molecular Discovery</h2>
+        <section id="features" class="py-14 sm:py-16 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-slate-800/60">
+            <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-14">
+                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white mb-2 sm:mb-3">Engineered for Molecular Discovery</h2>
                 <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">Six computational modules unifying structural biology, machine learning predictions, and lab evidence management.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
                 
                 <!-- Card 1: 3D Protein Helix -->
                 <div class="glass-panel glass-card-hover p-6 rounded-2xl border border-slate-200 dark:border-slate-800 flex flex-col justify-between">
@@ -451,9 +453,9 @@
                                 <path d="M20 9.5l.5.5"/>
                             </svg>
                         </div>
-                        <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">AlphaFold 3D & Confidence</h3>
+                        <h3 class="text-base font-bold text-slate-900 dark:text-white mb-2">AlphaFold 3D &amp; Confidence</h3>
                         <p class="text-slate-600 dark:text-slate-400 text-xs leading-relaxed">
-                            Hardware-accelerated WebGL viewer rendering atomic coordinates with 4-tier pLDDT color ramps (Dark Blue >90 to Orange <50 IDR regions).
+                            Hardware-accelerated WebGL viewer rendering atomic coordinates with 4-tier pLDDT color ramps (Dark Blue &gt;90 to Orange &lt;50 IDR regions).
                         </p>
                     </div>
                 </div>
@@ -551,26 +553,26 @@
             </div>
         </section>
 
-        <!-- 2. IN-SILICO COMPUTATIONAL INTELLIGENCE ENGINES -->
-        <section id="algorithms" class="py-16 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-slate-800/60">
-            <div class="text-center max-w-3xl mx-auto mb-14">
-                <span class="text-xs font-extrabold uppercase tracking-wider text-teal-600 dark:text-teal-400 bg-teal-100 dark:bg-teal-950/70 border border-teal-300 dark:border-teal-500/30 px-3 py-1 rounded-full">Pure On-Device Compute (&lt;5ms)</span>
-                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white mt-3 mb-3">In-Silico Biophysical Algorithms</h2>
+        <!-- 3. IN-SILICO COMPUTATIONAL INTELLIGENCE ENGINES -->
+        <section id="algorithms" class="py-14 sm:py-16 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-slate-800/60">
+            <div class="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
+                <span class="text-[10px] sm:text-xs font-extrabold uppercase tracking-wider text-teal-600 dark:text-teal-400 bg-teal-100 dark:bg-teal-950/70 border border-teal-300 dark:border-teal-500/30 px-3 py-1 rounded-full">Pure On-Device Compute (&lt;5ms)</span>
+                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white mt-3 mb-2 sm:mb-3">In-Silico Biophysical Algorithms</h2>
                 <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">Native mathematical engines executing directly on your phone's processor with 0 MB cloud latency and 100% offline data privacy.</p>
             </div>
 
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8">
                 <!-- Engine 1: Mutation Shockwave -->
-                <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-amber-300/60 dark:border-amber-500/30 flex flex-col justify-between relative overflow-hidden">
+                <div class="glass-panel p-5 sm:p-8 rounded-3xl border border-amber-300/60 dark:border-amber-500/30 flex flex-col justify-between relative overflow-hidden">
                     <div class="absolute -right-10 -top-10 w-40 h-40 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
                     <div>
                         <div class="flex items-center gap-3 mb-4">
-                            <div class="w-12 h-12 rounded-2xl bg-amber-100 dark:bg-amber-950/80 border border-amber-300 dark:border-amber-500/40 flex items-center justify-center text-amber-600 dark:text-amber-400">
-                                <i data-lucide="zap" class="w-6 h-6"></i>
+                            <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-amber-100 dark:bg-amber-950/80 border border-amber-300 dark:border-amber-500/40 flex items-center justify-center text-amber-600 dark:text-amber-400 shrink-0">
+                                <i data-lucide="zap" class="w-5 h-5 sm:w-6 sm:h-6"></i>
                             </div>
                             <div>
-                                <span class="text-[10px] font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400 bg-amber-100 dark:bg-amber-900/40 px-2 py-0.5 rounded">Variant Destabilization Engine</span>
-                                <h3 class="text-lg font-black text-slate-900 dark:text-white">Mutation Shockwave &amp; Structural Breaker</h3>
+                                <span class="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider text-amber-600 dark:text-amber-400 bg-amber-100 dark:bg-amber-900/40 px-2 py-0.5 rounded">Variant Destabilization Engine</span>
+                                <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white">Mutation Shockwave &amp; Structural Breaker</h3>
                             </div>
                         </div>
 
@@ -578,10 +580,10 @@
                             Predicts the structural collapse and thermodynamic destabilization of single amino acid substitutions (missense mutations) using classical biophysical matrices.
                         </p>
 
-                        <div class="bg-slate-100 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 mb-4 font-mono text-xs space-y-2">
+                        <div class="bg-slate-100 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-2xl p-3.5 sm:p-4 mb-4 font-mono text-[11px] sm:text-xs space-y-1.5 overflow-x-auto">
                             <div class="text-amber-600 dark:text-amber-400 font-bold">Grantham Distance Equation (Science 1974):</div>
-                            <div class="text-slate-800 dark:text-slate-200 font-semibold">D_g = &radic;[ &alpha;(c_i - c_j)&sup2; + &beta;(p_i - p_j)&sup2; + &gamma;(v_i - v_j)&sup2; ]</div>
-                            <div class="text-[11px] text-slate-500 dark:text-slate-400">Evaluates atomic composition (c), polarity (p), and molecular volume (v).</div>
+                            <div class="text-slate-800 dark:text-slate-200 font-semibold whitespace-nowrap">D_g = &radic;[ &alpha;(c_i - c_j)&sup2; + &beta;(p_i - p_j)&sup2; + &gamma;(v_i - v_j)&sup2; ]</div>
+                            <div class="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400">Evaluates atomic composition (c), polarity (p), and molecular volume (v).</div>
                         </div>
 
                         <ul class="space-y-2 text-xs text-slate-700 dark:text-slate-300">
@@ -593,16 +595,16 @@
                 </div>
 
                 <!-- Engine 2: Dynamic pH Titration -->
-                <div class="glass-panel p-6 sm:p-8 rounded-3xl border border-teal-300/60 dark:border-teal-500/30 flex flex-col justify-between relative overflow-hidden">
+                <div class="glass-panel p-5 sm:p-8 rounded-3xl border border-teal-300/60 dark:border-teal-500/30 flex flex-col justify-between relative overflow-hidden">
                     <div class="absolute -right-10 -top-10 w-40 h-40 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
                     <div>
                         <div class="flex items-center gap-3 mb-4">
-                            <div class="w-12 h-12 rounded-2xl bg-teal-100 dark:bg-teal-950/80 border border-teal-300 dark:border-teal-500/40 flex items-center justify-center text-teal-600 dark:text-teal-400">
-                                <i data-lucide="activity" class="w-6 h-6"></i>
+                            <div class="w-11 h-11 sm:w-12 sm:h-12 rounded-2xl bg-teal-100 dark:bg-teal-950/80 border border-teal-300 dark:border-teal-500/40 flex items-center justify-center text-teal-600 dark:text-teal-400 shrink-0">
+                                <i data-lucide="activity" class="w-5 h-5 sm:w-6 sm:h-6"></i>
                             </div>
                             <div>
-                                <span class="text-[10px] font-extrabold uppercase tracking-wider text-teal-600 dark:text-teal-400 bg-teal-100 dark:bg-teal-900/40 px-2 py-0.5 rounded">Electrostatic Equilibrium Solver</span>
-                                <h3 class="text-lg font-black text-slate-900 dark:text-white">Dynamic pH Titration &amp; Net Charge Curve</h3>
+                                <span class="text-[9px] sm:text-[10px] font-extrabold uppercase tracking-wider text-teal-600 dark:text-teal-400 bg-teal-100 dark:bg-teal-900/40 px-2 py-0.5 rounded">Electrostatic Equilibrium Solver</span>
+                                <h3 class="text-base sm:text-lg font-black text-slate-900 dark:text-white">Dynamic pH Titration &amp; Net Charge Curve</h3>
                             </div>
                         </div>
 
@@ -610,10 +612,10 @@
                             Calculates the exact theoretical Isoelectric Point (pI) and plots the continuous net charge curve from pH 0.0 to 14.0 in real-time.
                         </p>
 
-                        <div class="bg-slate-100 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-2xl p-4 mb-4 font-mono text-xs space-y-2">
+                        <div class="bg-slate-100 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-800 rounded-2xl p-3.5 sm:p-4 mb-4 font-mono text-[11px] sm:text-xs space-y-1.5 overflow-x-auto">
                             <div class="text-teal-600 dark:text-teal-400 font-bold">Henderson-Hasselbalch Equilibrium:</div>
-                            <div class="text-slate-800 dark:text-slate-200 font-semibold">&theta;+ = 1 / [1 + 10^(pH - pKa)], &theta;- = 1 / [1 + 10^(pKa - pH)]</div>
-                            <div class="text-[11px] text-slate-500 dark:text-slate-400">Solved with High-Precision Binary Search for Q_net(pH) = 0 (&epsilon; &lt; 0.0001).</div>
+                            <div class="text-slate-800 dark:text-slate-200 font-semibold whitespace-nowrap">&theta;+ = 1 / [1 + 10^(pH - pKa)], &theta;- = 1 / [1 + 10^(pKa - pH)]</div>
+                            <div class="text-[10px] sm:text-[11px] text-slate-500 dark:text-slate-400">Solved with High-Precision Binary Search for Q_net(pH) = 0 (&epsilon; &lt; 0.0001).</div>
                         </div>
 
                         <ul class="space-y-2 text-xs text-slate-700 dark:text-slate-300">
@@ -626,16 +628,16 @@
             </div>
         </section>
 
-        <!-- 3. WHO IS BIOFOLD FOR? (TARGET PERSONAS) -->
-        <section id="who-is-it-for" class="py-16 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-slate-800/60">
-            <div class="text-center max-w-2xl mx-auto mb-14">
-                <span class="text-xs font-extrabold uppercase tracking-wider text-teal-600 dark:text-teal-400 bg-teal-100 dark:bg-teal-950/70 border border-teal-300 dark:border-teal-500/30 px-3 py-1 rounded-full">Target Audience</span>
-                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white mt-3 mb-3">Designed for Every Level of Research</h2>
+        <!-- 4. WHO IS BIOFOLD FOR? (TARGET PERSONAS) -->
+        <section id="who-is-it-for" class="py-14 sm:py-16 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-slate-800/60">
+            <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-14">
+                <span class="text-[10px] sm:text-xs font-extrabold uppercase tracking-wider text-teal-600 dark:text-teal-400 bg-teal-100 dark:bg-teal-950/70 border border-teal-300 dark:border-teal-500/30 px-3 py-1 rounded-full">Target Audience</span>
+                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white mt-3 mb-2 sm:mb-3">Designed for Every Level of Research</h2>
                 <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">From classroom learning to lab bench triage, BioFold serves academic and experimental bioscience workflows.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-                <div class="glass-panel p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
+                <div class="glass-panel p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
                     <div class="w-10 h-10 rounded-xl bg-blue-100 dark:bg-blue-950/80 border border-blue-300 dark:border-blue-500/30 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-4">
                         <i data-lucide="graduation-cap" class="w-5 h-5"></i>
                     </div>
@@ -645,7 +647,7 @@
                     </p>
                 </div>
 
-                <div class="glass-panel p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+                <div class="glass-panel p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
                     <div class="w-10 h-10 rounded-xl bg-teal-100 dark:bg-teal-950/80 border border-teal-300 dark:border-teal-500/30 flex items-center justify-center text-teal-600 dark:text-teal-400 mb-4">
                         <i data-lucide="presentation" class="w-5 h-5"></i>
                     </div>
@@ -655,7 +657,7 @@
                     </p>
                 </div>
 
-                <div class="glass-panel p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+                <div class="glass-panel p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
                     <div class="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-950/80 border border-emerald-300 dark:border-emerald-500/30 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-4">
                         <i data-lucide="flask-conical" class="w-5 h-5"></i>
                     </div>
@@ -665,7 +667,7 @@
                     </p>
                 </div>
 
-                <div class="glass-panel p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+                <div class="glass-panel p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
                     <div class="w-10 h-10 rounded-xl bg-purple-100 dark:bg-purple-950/80 border border-purple-300 dark:border-purple-500/30 flex items-center justify-center text-purple-600 dark:text-purple-400 mb-4">
                         <i data-lucide="dna" class="w-5 h-5"></i>
                     </div>
@@ -677,16 +679,16 @@
             </div>
         </section>
 
-        <!-- 4. STEP-BY-STEP FEATURE WORKFLOW GUIDE -->
-        <section id="how-to-use" class="py-16 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-slate-800/60">
-            <div class="text-center max-w-2xl mx-auto mb-14">
-                <span class="text-xs font-extrabold uppercase tracking-wider text-teal-600 dark:text-teal-400 bg-teal-100 dark:bg-teal-950/70 border border-teal-300 dark:border-teal-500/30 px-3 py-1 rounded-full">User Workflow</span>
-                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white mt-3 mb-3">How to Use BioFold</h2>
+        <!-- 5. STEP-BY-STEP FEATURE WORKFLOW GUIDE -->
+        <section id="how-to-use" class="py-14 sm:py-16 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-slate-800/60">
+            <div class="text-center max-w-2xl mx-auto mb-12 sm:mb-14">
+                <span class="text-[10px] sm:text-xs font-extrabold uppercase tracking-wider text-teal-600 dark:text-teal-400 bg-teal-100 dark:bg-teal-950/70 border border-teal-300 dark:border-teal-500/30 px-3 py-1 rounded-full">User Workflow</span>
+                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white mt-3 mb-2 sm:mb-3">How to Use BioFold</h2>
                 <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">Follow a cohesive step-by-step scientific exploration pipeline.</p>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="glass-panel p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+                <div class="glass-panel p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
                     <div class="text-xs font-bold text-teal-600 dark:text-teal-400 mb-2">STEP 01</div>
                     <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1">Search Target Protein</h3>
                     <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
@@ -694,7 +696,7 @@
                     </p>
                 </div>
 
-                <div class="glass-panel p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+                <div class="glass-panel p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
                     <div class="text-xs font-bold text-teal-600 dark:text-teal-400 mb-2">STEP 02</div>
                     <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1">3D Structure &amp; pLDDT Audit</h3>
                     <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
@@ -702,7 +704,7 @@
                     </p>
                 </div>
 
-                <div class="glass-panel p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+                <div class="glass-panel p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
                     <div class="text-xs font-bold text-teal-600 dark:text-teal-400 mb-2">STEP 03</div>
                     <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1">In-Silico Variant Testing</h3>
                     <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
@@ -710,7 +712,7 @@
                     </p>
                 </div>
 
-                <div class="glass-panel p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+                <div class="glass-panel p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
                     <div class="text-xs font-bold text-teal-600 dark:text-teal-400 mb-2">STEP 04</div>
                     <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1">pH Titration &amp; pI Curve</h3>
                     <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
@@ -718,7 +720,7 @@
                     </p>
                 </div>
 
-                <div class="glass-panel p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+                <div class="glass-panel p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
                     <div class="text-xs font-bold text-teal-600 dark:text-teal-400 mb-2">STEP 05</div>
                     <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1">Pairwise Homology Compare</h3>
                     <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
@@ -726,7 +728,7 @@
                     </p>
                 </div>
 
-                <div class="glass-panel p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
+                <div class="glass-panel p-5 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-800">
                     <div class="text-xs font-bold text-teal-600 dark:text-teal-400 mb-2">STEP 06</div>
                     <h3 class="text-sm font-bold text-slate-900 dark:text-white mb-1">Export PDF Research Dossier</h3>
                     <p class="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">
@@ -736,18 +738,18 @@
             </div>
         </section>
 
-        <!-- 5. pLDDT CONFIDENCE SCIENTIFIC REFERENCE GUIDE -->
-        <section id="plddt-guide" class="py-16 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-slate-800/60">
+        <!-- 6. pLDDT CONFIDENCE SCIENTIFIC REFERENCE GUIDE -->
+        <section id="plddt-guide" class="py-14 sm:py-16 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-slate-800/60">
             <div class="text-center max-w-2xl mx-auto mb-12">
-                <span class="text-xs font-extrabold uppercase tracking-wider text-teal-600 dark:text-teal-400 bg-teal-100 dark:bg-teal-950/70 border border-teal-300 dark:border-teal-500/30 px-3 py-1 rounded-full">Confidence Spectrum</span>
-                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white mt-3 mb-3">AlphaFold pLDDT Metric System</h2>
+                <span class="text-[10px] sm:text-xs font-extrabold uppercase tracking-wider text-teal-600 dark:text-teal-400 bg-teal-100 dark:bg-teal-950/70 border border-teal-300 dark:border-teal-500/30 px-3 py-1 rounded-full">Confidence Spectrum</span>
+                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white mt-3 mb-2 sm:mb-3">AlphaFold pLDDT Metric System</h2>
                 <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">Standardized color scales and biological interpretation for predicted per-residue coordinates.</p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
                 
                 <!-- High Confidence -->
-                <div class="p-5 rounded-2xl bg-blue-100/60 dark:bg-blue-950/40 border border-blue-300 dark:border-blue-600/40">
+                <div class="p-4 sm:p-5 rounded-2xl bg-blue-100/60 dark:bg-blue-950/40 border border-blue-300 dark:border-blue-600/40">
                     <div class="flex items-center justify-between mb-3">
                         <span class="text-xs font-mono font-bold text-blue-700 dark:text-blue-400 bg-blue-200/80 dark:bg-blue-900/60 px-2 py-0.5 rounded">pLDDT &gt; 90</span>
                         <span class="w-3 h-3 rounded-full bg-blue-500 shadow-lg shadow-blue-500/50"></span>
@@ -757,7 +759,7 @@
                 </div>
 
                 <!-- Confident -->
-                <div class="p-5 rounded-2xl bg-cyan-100/60 dark:bg-cyan-950/40 border border-cyan-300 dark:border-cyan-600/40">
+                <div class="p-4 sm:p-5 rounded-2xl bg-cyan-100/60 dark:bg-cyan-950/40 border border-cyan-300 dark:border-cyan-600/40">
                     <div class="flex items-center justify-between mb-3">
                         <span class="text-xs font-mono font-bold text-cyan-700 dark:text-cyan-400 bg-cyan-200/80 dark:bg-cyan-900/60 px-2 py-0.5 rounded">70 &le; pLDDT &lt; 90</span>
                         <span class="w-3 h-3 rounded-full bg-cyan-400 shadow-lg shadow-cyan-400/50"></span>
@@ -767,7 +769,7 @@
                 </div>
 
                 <!-- Low Confidence -->
-                <div class="p-5 rounded-2xl bg-amber-100/60 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-600/40">
+                <div class="p-4 sm:p-5 rounded-2xl bg-amber-100/60 dark:bg-amber-950/40 border border-amber-300 dark:border-amber-600/40">
                     <div class="flex items-center justify-between mb-3">
                         <span class="text-xs font-mono font-bold text-amber-700 dark:text-amber-400 bg-amber-200/80 dark:bg-amber-900/60 px-2 py-0.5 rounded">50 &le; pLDDT &lt; 70</span>
                         <span class="w-3 h-3 rounded-full bg-amber-400 shadow-lg shadow-amber-400/50"></span>
@@ -777,7 +779,7 @@
                 </div>
 
                 <!-- IDR -->
-                <div class="p-5 rounded-2xl bg-orange-100/60 dark:bg-orange-950/40 border border-orange-300 dark:border-orange-600/40">
+                <div class="p-4 sm:p-5 rounded-2xl bg-orange-100/60 dark:bg-orange-950/40 border border-orange-300 dark:border-orange-600/40">
                     <div class="flex items-center justify-between mb-3">
                         <span class="text-xs font-mono font-bold text-orange-700 dark:text-orange-400 bg-orange-200/80 dark:bg-orange-900/60 px-2 py-0.5 rounded">pLDDT &lt; 50</span>
                         <span class="w-3 h-3 rounded-full bg-orange-500 shadow-lg shadow-orange-500/50"></span>
@@ -789,134 +791,12 @@
             </div>
         </section>
 
-        <!-- 4. 10 TARGETED, SEO-FRIENDLY FAQS -->
-        <section id="faq" class="py-16 px-4 sm:px-8 max-w-4xl mx-auto border-t border-slate-200 dark:border-slate-800/60">
-            <div class="text-center mb-12">
-                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white mb-3">Frequently Asked Questions</h2>
-                <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">Everything you need to know about BioFold's scientific capabilities, target audience, and data privacy.</p>
-            </div>
-
-            <div class="space-y-3.5">
-                
-                <!-- 1 -->
-                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group" open>
-                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
-                        <span>1. Who should use the BioFold mobile app?</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform"></i>
-                    </summary>
-                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
-                        BioFold is built for university students in biochemistry and biotechnology, academic researchers, bioinformaticians, structural biologists, and pharma scientists who require quick mobile access to AlphaFold 3D structures, UniProt functional data, and literature.
-                    </p>
-                </details>
-
-                <!-- 2 -->
-                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
-                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
-                        <span>2. How does the AlphaFold 3D viewer & pLDDT confidence analysis work?</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform"></i>
-                    </summary>
-                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
-                        BioFold fetches predicted 3D atomic coordinates from the EMBL-EBI AlphaFold DB API. It renders coordinates with WebGL and visualizes per-residue pLDDT scores using standard 4-tier color gradients (>90 Very High, 70–90 Confident, 50–70 Low, <50 Disordered).
-                    </p>
-                </details>
-
-                <!-- 3 -->
-                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
-                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
-                        <span>3. What is the Dual-Protein Pairwise Comparator?</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform"></i>
-                    </summary>
-                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
-                        The Comparator enables researchers to contrast any two proteins (such as TP53 vs p73) side-by-side. It computes sequence length delta, mean pLDDT confidence variances, shared InterPro functional domains, and cross-referenced PubMed literature.
-                    </p>
-                </details>
-
-                <!-- 4 -->
-                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
-                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
-                        <span>4. Can I add multiple notes and mutation logs to a single protein?</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform"></i>
-                    </summary>
-                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
-                        Yes. In the Evidence Board workspace, you can attach multiple custom notes (Mutation checkpoints, Structure observations, Lab findings) to any protein, edit them anytime, and categorize them with custom priorities.
-                    </p>
-                </details>
-
-                <!-- 5 -->
-                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
-                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
-                        <span>5. How do I generate publication-ready PDF dossiers?</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform"></i>
-                    </summary>
-                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
-                        Tap "Export PDF Report" inside your workspace. You can optionally attach Lead Researcher name, Lab/Institution, and Project ID to compile a high-resolution, multi-page vector PDF dossier containing all structural metrics and notes.
-                    </p>
-                </details>
-
-                <!-- 6 -->
-                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
-                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
-                        <span>6. What scientific databases are integrated into BioFold?</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform"></i>
-                    </summary>
-                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
-                        BioFold unifies UniProtKB (Swiss-Prot/TrEMBL), DeepMind AlphaFold DB, RCSB Protein Data Bank (PDB), EMBL-EBI InterPro domain signatures (CDD, PFAM, PROSITE), and Europe PMC scientific literature.
-                    </p>
-                </details>
-
-                <!-- 7 -->
-                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
-                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
-                        <span>7. Does BioFold work without an active internet connection?</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform"></i>
-                    </summary>
-                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
-                        Yes. All saved bookmarks, workspace evidence boards, custom notes, and educational guides are stored in local Hive NoSQL database and remain accessible offline.
-                    </p>
-                </details>
-
-                <!-- 8 -->
-                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
-                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
-                        <span>8. How does the Bio AI Assistant support molecular research?</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform"></i>
-                    </summary>
-                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
-                        Bio AI answers questions regarding protein function, catalytic mechanisms, disease pathways, and AlphaFold confidence interpretation with pre-configured quick-prompt accelerators.
-                    </p>
-                </details>
-
-                <!-- 9 -->
-                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
-                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
-                        <span>9. Is my research data and lab notes kept private?</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform"></i>
-                    </summary>
-                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
-                        Yes. All personal notes, workspace evidence, and bookmarks reside strictly on your local device. BioFold adheres to strict open-science privacy principles without sending private notes to cloud trackers.
-                    </p>
-                </details>
-
-                <!-- 10 -->
-                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
-                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
-                        <span>10. How do I download or install the BioFold app?</span>
-                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform"></i>
-                    </summary>
-                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
-                        BioFold is available on Google Play Store via package ID <a href="https://play.google.com/store/apps/details?id=com.biofold.biofold_learn" class="text-teal-600 dark:text-teal-400 font-bold hover:underline">com.biofold.biofold_learn</a>. You can also build it directly from source on GitHub.
-                    </p>
-                </details>
-
-            </div>
-        </section>
-
-        <!-- 5. QUICKSTART FOR DEVELOPERS & RESEARCHERS -->
-        <section id="quickstart" class="py-16 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-slate-800/60">
-            <div class="glass-panel p-6 sm:p-10 rounded-3xl border border-teal-500/30">
-                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <!-- 7. QUICKSTART FOR DEVELOPERS & RESEARCHERS -->
+        <section id="quickstart" class="py-14 sm:py-16 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-slate-800/60">
+            <div class="glass-panel p-5 sm:p-10 rounded-3xl border border-teal-500/30">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8 items-center">
                     <div class="lg:col-span-6 space-y-4">
-                        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">Open Source & Extensible</h2>
+                        <h2 class="text-2xl sm:text-3xl font-black text-slate-900 dark:text-white">Open Source &amp; Extensible</h2>
                         <p class="text-slate-700 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
                             BioFold is fully open-source under the MIT license. Clone the repository, configure your Flutter environment, and customize research modules or data connectors for your lab.
                         </p>
@@ -934,7 +814,7 @@
                         </div>
                     </div>
                     
-                    <div class="lg:col-span-6 bg-slate-950 rounded-2xl p-5 border border-slate-800 font-mono text-xs shadow-xl">
+                    <div class="lg:col-span-6 bg-slate-950 rounded-2xl p-4 sm:p-5 border border-slate-800 font-mono text-xs shadow-xl overflow-x-auto">
                         <div class="flex items-center justify-between pb-3 mb-3 border-b border-slate-800 text-slate-400 text-[11px]">
                             <span>terminal</span>
                             <span>bash</span>
@@ -950,17 +830,139 @@
             </div>
         </section>
 
-        <!-- 6. CONTACT & SUPPORT SECTION -->
-        <section id="contact" class="py-16 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-slate-800/60">
-            <div class="glass-panel p-8 sm:p-10 rounded-3xl border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6">
+        <!-- 8. CONTACT & SUPPORT SECTION -->
+        <section id="contact" class="py-14 sm:py-16 px-4 sm:px-8 max-w-7xl mx-auto border-t border-slate-200 dark:border-slate-800/60">
+            <div class="glass-panel p-6 sm:p-10 rounded-3xl border border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-6">
                 <div class="space-y-2 text-center sm:text-left">
                     <h3 class="text-xl sm:text-2xl font-black text-slate-900 dark:text-white">Have Questions or Feature Requests?</h3>
-                    <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">Reach out directly to the core development & research team for support, institutional partnerships, or data suggestions.</p>
+                    <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">Reach out directly to the core development &amp; research team for support, institutional partnerships, or data suggestions.</p>
                 </div>
-                <a href="mailto:theflutterfever@gmail.com" class="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm text-white bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 border border-slate-700 transition-all flex items-center gap-2.5 shadow-md shrink-0 hover:scale-105">
+                <a href="mailto:theflutterfever@gmail.com" class="px-5 py-3 rounded-xl font-bold text-xs sm:text-sm text-white bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 border border-slate-700 transition-all flex items-center gap-2.5 shadow-md shrink-0">
                     <i data-lucide="mail" class="w-4 h-4 text-teal-400"></i>
                     <span>theflutterfever@gmail.com</span>
                 </a>
+            </div>
+        </section>
+
+        <!-- 9. 10 TARGETED, SEO-FRIENDLY FAQS (AT THE VERY BOTTOM OF PAGE BEFORE FOOTER) -->
+        <section id="faq" class="py-14 sm:py-16 px-4 sm:px-8 max-w-4xl mx-auto border-t border-slate-200 dark:border-slate-800/60">
+            <div class="text-center mb-10 sm:mb-12">
+                <h2 class="text-2xl sm:text-4xl font-black text-slate-900 dark:text-white mb-2 sm:mb-3">Frequently Asked Questions</h2>
+                <p class="text-slate-600 dark:text-slate-400 text-xs sm:text-sm">Everything you need to know about BioFold's scientific capabilities, target audience, and data privacy.</p>
+            </div>
+
+            <div class="space-y-3 sm:space-y-3.5">
+                
+                <!-- 1 -->
+                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group" open>
+                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
+                        <span>1. Who should use the BioFold mobile app?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform shrink-0 ml-2"></i>
+                    </summary>
+                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
+                        BioFold is built for university students in biochemistry and biotechnology, academic researchers, bioinformaticians, structural biologists, and pharma scientists who require quick mobile access to AlphaFold 3D structures, UniProt functional data, and literature.
+                    </p>
+                </details>
+
+                <!-- 2 -->
+                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
+                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
+                        <span>2. How does the AlphaFold 3D viewer &amp; pLDDT confidence analysis work?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform shrink-0 ml-2"></i>
+                    </summary>
+                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
+                        BioFold fetches predicted 3D atomic coordinates from the EMBL-EBI AlphaFold DB API. It renders coordinates with WebGL and visualizes per-residue pLDDT scores using standard 4-tier color gradients (&gt;90 Very High, 70–90 Confident, 50–70 Low, &lt;50 Disordered).
+                    </p>
+                </details>
+
+                <!-- 3 -->
+                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
+                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
+                        <span>3. What is the Dual-Protein Pairwise Comparator?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform shrink-0 ml-2"></i>
+                    </summary>
+                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
+                        The Comparator enables researchers to contrast any two proteins (such as TP53 vs p73) side-by-side. It computes sequence length delta, mean pLDDT confidence variances, shared InterPro functional domains, and cross-referenced PubMed literature.
+                    </p>
+                </details>
+
+                <!-- 4 -->
+                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
+                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
+                        <span>4. Can I add multiple notes and mutation logs to a single protein?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform shrink-0 ml-2"></i>
+                    </summary>
+                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
+                        Yes. In the Evidence Board workspace, you can attach multiple custom notes (Mutation checkpoints, Structure observations, Lab findings) to any protein, edit them anytime, and categorize them with custom priorities.
+                    </p>
+                </details>
+
+                <!-- 5 -->
+                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
+                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
+                        <span>5. How do I generate publication-ready PDF dossiers?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform shrink-0 ml-2"></i>
+                    </summary>
+                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
+                        Tap "Export PDF Report" inside your workspace. You can optionally attach Lead Researcher name, Lab/Institution, and Project ID to compile a high-resolution, multi-page vector PDF dossier containing all structural metrics and notes.
+                    </p>
+                </details>
+
+                <!-- 6 -->
+                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
+                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
+                        <span>6. What scientific databases are integrated into BioFold?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform shrink-0 ml-2"></i>
+                    </summary>
+                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
+                        BioFold unifies UniProtKB (Swiss-Prot/TrEMBL), DeepMind AlphaFold DB, RCSB Protein Data Bank (PDB), EMBL-EBI InterPro domain signatures (CDD, PFAM, PROSITE), and Europe PMC scientific literature.
+                    </p>
+                </details>
+
+                <!-- 7 -->
+                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
+                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
+                        <span>7. Does BioFold work without an active internet connection?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform shrink-0 ml-2"></i>
+                    </summary>
+                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
+                        Yes. All saved bookmarks, workspace evidence boards, custom notes, and educational guides are stored in local Hive NoSQL database and remain accessible offline.
+                    </p>
+                </details>
+
+                <!-- 8 -->
+                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
+                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
+                        <span>8. How does the Bio AI Assistant support molecular research?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform shrink-0 ml-2"></i>
+                    </summary>
+                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
+                        Bio AI answers questions regarding protein function, catalytic mechanisms, disease pathways, and AlphaFold confidence interpretation with pre-configured quick-prompt accelerators.
+                    </p>
+                </details>
+
+                <!-- 9 -->
+                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
+                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
+                        <span>9. Is my research data and lab notes kept private?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform shrink-0 ml-2"></i>
+                    </summary>
+                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
+                        Yes. All personal notes, workspace evidence, and bookmarks reside strictly on your local device. BioFold adheres to strict open-science privacy principles without sending private notes to cloud trackers.
+                    </p>
+                </details>
+
+                <!-- 10 -->
+                <details class="glass-panel p-4 sm:p-5 rounded-xl border border-slate-200 dark:border-slate-800 group">
+                    <summary class="font-bold text-slate-900 dark:text-white cursor-pointer flex items-center justify-between text-xs sm:text-sm">
+                        <span>10. How do I download or install the BioFold app?</span>
+                        <i data-lucide="chevron-down" class="w-4 h-4 text-teal-600 dark:text-teal-400 group-open:rotate-180 transition-transform shrink-0 ml-2"></i>
+                    </summary>
+                    <p class="text-slate-700 dark:text-slate-300 text-xs mt-2.5 leading-relaxed">
+                        BioFold is available on Google Play Store via package ID <a href="https://play.google.com/store/apps/details?id=com.biofold.biofold_learn" class="text-teal-600 dark:text-teal-400 font-bold hover:underline">com.biofold.biofold_learn</a>. You can also build it directly from source on GitHub.
+                    </p>
+                </details>
+
             </div>
         </section>
 
@@ -969,12 +971,12 @@
     <!-- FOOTER -->
     <footer class="border-t border-slate-200 dark:border-slate-800/80 py-10 px-4 sm:px-8 text-center text-xs text-slate-500">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
-            <div class="flex items-center gap-2">
+            <div class="flex items-center justify-center gap-2">
                 <i data-lucide="atom" class="w-4 h-4 text-teal-600 dark:text-teal-400 animate-spin-slow"></i>
                 <span class="font-bold tracking-wider text-slate-800 dark:text-slate-300 uppercase">BIOFOLD</span>
                 <span>— Open Science Structural Biology</span>
             </div>
-            <div class="flex items-center gap-6">
+            <div class="flex flex-wrap items-center justify-center gap-4 sm:gap-6">
                 <a href="mailto:theflutterfever@gmail.com" class="hover:text-teal-600 dark:hover:text-teal-400 transition-colors flex items-center gap-1.5 font-medium">
                     <i data-lucide="mail" class="w-3.5 h-3.5"></i>
                     <span>theflutterfever@gmail.com</span>
@@ -1027,7 +1029,6 @@
         let height = canvas.height = window.innerHeight;
 
         const particles = [];
-        // Adjusted comfortable particle density (clean & smooth)
         const particleCount = Math.min(Math.floor(window.innerWidth / 22), 62);
         const maxDistance = 135;
 
@@ -1257,17 +1258,17 @@
 
             // 1. Cross-fade center, left, and right images
             mockupImgCenter.style.opacity = '0';
-            mockupImgLeft.style.opacity = '0';
-            mockupImgRight.style.opacity = '0';
+            if (mockupImgLeft) mockupImgLeft.style.opacity = '0';
+            if (mockupImgRight) mockupImgRight.style.opacity = '0';
 
             setTimeout(() => {
                 mockupImgCenter.src = current.image;
-                mockupImgLeft.src = screens[prevIndex].image;
-                mockupImgRight.src = screens[nextIndex].image;
+                if (mockupImgLeft) mockupImgLeft.src = screens[prevIndex].image;
+                if (mockupImgRight) mockupImgRight.src = screens[nextIndex].image;
 
                 mockupImgCenter.style.opacity = '1';
-                mockupImgLeft.style.opacity = '1';
-                mockupImgRight.style.opacity = '1';
+                if (mockupImgLeft) mockupImgLeft.style.opacity = '1';
+                if (mockupImgRight) mockupImgRight.style.opacity = '1';
             }, 180);
 
             // 2. Animate left-side copy
@@ -1287,9 +1288,9 @@
             // 3. Update button highlights
             screenBtns.forEach((btn, idx) => {
                 if (idx === index) {
-                    btn.className = 'screen-btn px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all bg-teal-500/20 text-teal-700 dark:text-teal-300 border border-teal-500/40 shadow-sm shadow-teal-500/20';
+                    btn.className = 'screen-btn px-2.5 py-1 rounded-lg text-[10px] sm:text-[11px] font-bold transition-all bg-teal-500/20 text-teal-700 dark:text-teal-300 border border-teal-500/40 shadow-sm shadow-teal-500/20';
                 } else {
-                    btn.className = 'screen-btn px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all bg-slate-200 dark:bg-slate-800/80 text-slate-700 dark:text-slate-400 border border-slate-300 dark:border-slate-700/60 hover:text-slate-900 dark:hover:text-white';
+                    btn.className = 'screen-btn px-2.5 py-1 rounded-lg text-[10px] sm:text-[11px] font-bold transition-all bg-slate-200 dark:bg-slate-800/80 text-slate-700 dark:text-slate-400 border border-slate-300 dark:border-slate-700/60 hover:text-slate-900 dark:hover:text-white';
                 }
             });
         }
