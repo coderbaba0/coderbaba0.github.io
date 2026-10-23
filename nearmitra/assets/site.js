@@ -48,3 +48,30 @@ dialog?.addEventListener('click', event => {
   if (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom) dialog.close();
 });
 dialog?.addEventListener('close', () => lastTrigger?.focus());
+// Progressive enhancement: text remains visible if scripting or observation fails.
+const motionAllowed = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (motionAllowed && 'IntersectionObserver' in window) {
+  const revealObserver = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, {threshold: 0.06});
+  document.querySelectorAll('.section-heading, .feature-card, .usecase-grid article, .ai-flow article, .platform-card, .product-image, .roadmap-preview, .roadmap-stages article').forEach(element => {
+    element.classList.add('reveal-ready');
+    revealObserver.observe(element);
+  });
+}
+const readingProgress = document.querySelector('.reading-progress');
+let progressScheduled = false;
+function updateReadingProgress() {
+  const range = document.documentElement.scrollHeight - window.innerHeight;
+  if (readingProgress) readingProgress.style.transform = `scaleX(${range > 0 ? Math.min(1, Math.max(0, window.scrollY / range)) : 0})`;
+  progressScheduled = false;
+}
+window.addEventListener('scroll', () => {
+  if (!progressScheduled) { progressScheduled = true; requestAnimationFrame(updateReadingProgress); }
+}, {passive: true});
+updateReadingProgress();

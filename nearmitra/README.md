@@ -2,7 +2,7 @@
 
 Static GitHub Pages website at https://coderbaba0.github.io/nearmitra/.
 
-13 self-contained HTML pages share `assets/site.css` and `assets/site.js`. No build, JavaScript framework, CDN or external font is required. Content remains readable with JavaScript disabled. Keep this folder next to the existing `biofold/` folder.
+14 self-contained HTML pages share `assets/site.css` and `assets/site.js`. No build, JavaScript framework, CDN or external font is required. Content remains readable with JavaScript disabled. Keep this folder next to the existing `biofold/` folder.
 
 ## Preview
 
@@ -17,3 +17,9 @@ Images are optimized copies of the NearMitra source repository's own app icon an
 The site has no analytics or tracking scripts. GitHub Pages handles hosting. Sitemap: https://coderbaba0.github.io/nearmitra/sitemap.xml . A subfolder `robots.txt` is not used because robots directives must live at the origin root; the existing root site is preserved.
 
 App source: https://github.com/coderbaba0/farmitra_nearby_flutter (GPL-3.0-only).
+
+## Visual design and motion
+
+Dark green NearMitra branding, radar patterns, animated product mockups, scroll reveals and a reading progress bar. Animations respect `prefers-reduced-motion`. Content and navigation links remain available without JavaScript.
+
+The Agents & MCP page is explicitly a proposed direction, not a shipped capability or delivery commitment. Current Nearby AI flows and example prompts are documented separately. Platform buttons include Android and Windows icons. Until direct release assets are provided, release buttons use the official GitHub Releases page.
