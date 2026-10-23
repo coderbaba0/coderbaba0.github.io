@@ -2,7 +2,7 @@
 
 Static GitHub Pages website at https://coderbaba0.github.io/nearmitra/.
 
-14 self-contained HTML pages share `assets/site.css` and `assets/site.js`. No build, JavaScript framework, CDN or external font is required. Content remains readable with JavaScript disabled. Keep this folder next to the existing `biofold/` folder.
+14 HTML pages share `assets/site.css` and `assets/site.js`. No build, JavaScript framework, CDN or external font is required. Content remains readable with JavaScript disabled. Keep this folder next to the existing `biofold/` folder.
 
 ## Preview
 
@@ -10,7 +10,7 @@ From the GitHub Pages repository root, run `python -m http.server 8080` and open
 
 ## Update
 
-Edit page HTML directly. Keep unique titles/descriptions, canonicals, social metadata and visible page content consistent. Add pages to `sitemap.xml` and the shared navigation/footer. Update download links only when verified release assets are actually published; the platform buttons currently lead to the source repository, as requested.
+Edit page HTML directly. Keep unique titles/descriptions, canonicals, social metadata and visible page content consistent. Add pages to `sitemap.xml` and the shared navigation/footer. Update download links only when verified release assets are actually published; the current links intentionally lead to GitHub Releases.
 
 Images are optimized copies of the NearMitra source repository's own app icon and screenshots; see `assets/images/SOURCES.md`. Historical UI labels are not feature/security guarantees. No Firebase project values, app data, signing material, APK or EXE are included.
 
@@ -18,8 +18,6 @@ The site has no analytics or tracking scripts. GitHub Pages handles hosting. Sit
 
 App source: https://github.com/coderbaba0/farmitra_nearby_flutter (GPL-3.0-only).
 
-## Visual design and motion
+## Appearance
 
-Charcoal surfaces with blue/cyan accents and original NearMitra app branding, radar patterns, animated product mockups, scroll reveals and a reading progress bar. Animations respect `prefers-reduced-motion`. Content and navigation links remain available without JavaScript.
-
-The Agents & MCP page is explicitly a proposed direction, not a shipped capability or delivery commitment. Current Nearby AI flows and example prompts are documented separately. Platform buttons include Android and Windows icons. Until direct release assets are provided, platform buttons use the official source repository URL.
+Logo-inspired green accents on charcoal dark and neutral light themes. The sun/moon button saves the theme on this browser using `localStorage`; no data is sent to a server. On first visit the OS color preference is used. Page headers include topic-specific animated SVG artwork with reduced-motion support. `assets/theme-init.js` applies the saved theme before the stylesheet to avoid a theme flash.
