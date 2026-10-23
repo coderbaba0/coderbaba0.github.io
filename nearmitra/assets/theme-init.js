@@ -1,9 +1,9 @@
-// Apply the saved choice before the stylesheet paints; default to the OS theme.
+// Apply the saved choice before the stylesheet paints; default to light on every page.
 (() => {
   let theme;
   try { theme = localStorage.getItem('nearmitra-theme'); } catch (_) {}
   if (theme !== 'dark' && theme !== 'light') {
-    theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    theme = 'light';
   }
   document.documentElement.dataset.theme = theme;
 })();

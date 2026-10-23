@@ -2,7 +2,7 @@
 
 Static GitHub Pages website at https://coderbaba0.github.io/nearmitra/.
 
-14 HTML pages share `assets/site.css` and `assets/site.js`. No build, JavaScript framework, CDN or external font is required. Content remains readable with JavaScript disabled. Keep this folder next to the existing `biofold/` folder.
+14 self-contained HTML pages share `assets/site.css` and `assets/site.js`. No build, JavaScript framework, CDN or external font is required. Content remains readable with JavaScript disabled. Keep this folder next to the existing `biofold/` folder.
 
 ## Preview
 
@@ -18,6 +18,8 @@ The site has no analytics or tracking scripts. GitHub Pages handles hosting. Sit
 
 App source: https://github.com/coderbaba0/farmitra_nearby_flutter (GPL-3.0-only).
 
-## Appearance
+## Theme behavior
 
-Logo-inspired green accents on charcoal dark and neutral light themes. The sun/moon button saves the theme on this browser using `localStorage`; no data is sent to a server. On first visit the OS color preference is used. Page headers include topic-specific animated SVG artwork with reduced-motion support. `assets/theme-init.js` applies the saved theme before the stylesheet to avoid a theme flash.
+Light is the first-visit default, regardless of operating-system theme. A deliberate dark/light selection is saved in browser localStorage and shared across all pages. Theme code is loaded separately from gallery/animation code. CSS and scripts have content-versioned URLs; internal page links also carry a release version to avoid stale HTML during navigation.
+
+Each of the 14 pages uses the same accessible sun/moon icon button. The chosen theme is loaded before styles paint, and the interactive controller is independent of the rest of the site JavaScript.
