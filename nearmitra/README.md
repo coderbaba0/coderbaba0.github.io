@@ -10,7 +10,7 @@ From the GitHub Pages repository root, run `python -m http.server 8080` and open
 
 ## Update
 
-Edit page HTML directly. Keep unique titles/descriptions, canonicals, social metadata and visible page content consistent. Add pages to `sitemap.xml` and the shared navigation/footer. Update download links only when verified release assets are actually published; the current links intentionally lead to GitHub Releases.
+Edit page HTML directly. Keep unique titles/descriptions, canonicals, social metadata and visible page content consistent. Add pages to `sitemap.xml` and the shared navigation/footer. Update download links only when verified release assets are actually published; the platform buttons currently lead to the source repository, as requested.
 
 Images are optimized copies of the NearMitra source repository's own app icon and screenshots; see `assets/images/SOURCES.md`. Historical UI labels are not feature/security guarantees. No Firebase project values, app data, signing material, APK or EXE are included.
 
@@ -22,4 +22,4 @@ App source: https://github.com/coderbaba0/farmitra_nearby_flutter (GPL-3.0-only)
 
 Dark green NearMitra branding, radar patterns, animated product mockups, scroll reveals and a reading progress bar. Animations respect `prefers-reduced-motion`. Content and navigation links remain available without JavaScript.
 
-The Agents & MCP page is explicitly a proposed direction, not a shipped capability or delivery commitment. Current Nearby AI flows and example prompts are documented separately. Platform buttons include Android and Windows icons. Until direct release assets are provided, release buttons use the official GitHub Releases page.
+The Agents & MCP page is explicitly a proposed direction, not a shipped capability or delivery commitment. Current Nearby AI flows and example prompts are documented separately. Platform buttons include Android and Windows icons. Until direct release assets are provided, platform buttons use the official source repository URL.
