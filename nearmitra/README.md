@@ -20,6 +20,6 @@ App source: https://github.com/coderbaba0/farmitra_nearby_flutter (GPL-3.0-only)
 
 ## Visual design and motion
 
-Dark green NearMitra branding, radar patterns, animated product mockups, scroll reveals and a reading progress bar. Animations respect `prefers-reduced-motion`. Content and navigation links remain available without JavaScript.
+Charcoal surfaces with blue/cyan accents and original NearMitra app branding, radar patterns, animated product mockups, scroll reveals and a reading progress bar. Animations respect `prefers-reduced-motion`. Content and navigation links remain available without JavaScript.
 
 The Agents & MCP page is explicitly a proposed direction, not a shipped capability or delivery commitment. Current Nearby AI flows and example prompts are documented separately. Platform buttons include Android and Windows icons. Until direct release assets are provided, platform buttons use the official source repository URL.
