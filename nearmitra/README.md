@@ -23,3 +23,11 @@ App source: https://github.com/coderbaba0/farmitra_nearby_flutter (GPL-3.0-only)
 Light is the first-visit default, regardless of operating-system theme. A deliberate dark/light selection is saved in browser localStorage and shared across all pages. Theme code is loaded separately from gallery/animation code. CSS and scripts have content-versioned URLs; internal page links also carry a release version to avoid stale HTML during navigation.
 
 Each of the 14 pages uses the same accessible sun/moon icon button. The chosen theme is loaded before styles paint, and the interactive controller is independent of the rest of the site JavaScript.
+
+## Release download buttons
+
+Android: https://github.com/coderbaba0/farmitra_nearby_flutter/releases/download/v1.0.3/NearMitra-Android-1.0.3.apk
+
+Windows: https://github.com/coderbaba0/farmitra_nearby_flutter/releases/download/v2.1.23/NearMitra_Setup_2.1.23_x64.exe
+
+Download buttons open the exact maintainer-supplied release URLs in a new tab with `noopener noreferrer`. Source links remain pointed at the source repository. Release accessibility follows GitHub repository/release permissions; no visibility changes are made by this site.
