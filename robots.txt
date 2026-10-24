@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://coderbaba0.github.io/sitemap.xml
+Sitemap: https://coderbaba0.github.io/nearmitra/sitemap.xml
