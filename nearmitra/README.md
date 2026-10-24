@@ -16,7 +16,7 @@ Images are optimized copies of the NearMitra source repository's own app icon an
 
 The site has no analytics or tracking scripts. GitHub Pages handles hosting. Sitemap: https://coderbaba0.github.io/nearmitra/sitemap.xml . A subfolder `robots.txt` is not used because robots directives must live at the origin root; the existing root site is preserved.
 
-App source: https://github.com/coderbaba0/farmitra_nearby_flutter (GPL-3.0-only).
+App source: https://github.com/coderbaba0/nearmitra (GPL-3.0-only).
 
 ## Theme behavior
 
@@ -26,8 +26,8 @@ Each of the 14 pages uses the same accessible sun/moon icon button. The chosen t
 
 ## Release download buttons
 
-Android: https://github.com/coderbaba0/farmitra_nearby_flutter/releases/download/v1.0.3/NearMitra-Android-1.0.3.apk
+Android: https://github.com/coderbaba0/nearmitra/releases/download/v1.0.3/NearMitra-Android-1.0.3.apk
 
-Windows: https://github.com/coderbaba0/farmitra_nearby_flutter/releases/download/v2.1.23/NearMitra_Setup_2.1.23_x64.exe
+Windows: https://github.com/coderbaba0/nearmitra/releases/download/v2.1.23/NearMitra_Setup_2.1.23_x64.exe
 
 Download buttons open the exact maintainer-supplied release URLs in a new tab with `noopener noreferrer`. Source links remain pointed at the source repository. Release accessibility follows GitHub repository/release permissions; no visibility changes are made by this site.

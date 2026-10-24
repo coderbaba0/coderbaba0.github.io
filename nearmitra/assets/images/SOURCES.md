@@ -1,6 +1,6 @@
 # Image sources
 
-Optimized copies of assets from https://github.com/coderbaba0/farmitra_nearby_flutter (GPL-3.0-only).
+Optimized copies of assets from https://github.com/coderbaba0/nearmitra (GPL-3.0-only).
 
 - `logo.webp` <- `assets/images/nearmitra.png`
 - `windows-home.webp` <- `screenshot/windowsapp/0.png`
